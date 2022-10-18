@@ -7,6 +7,8 @@ websocket client for calculating analytics data
 Receives logging data by listening to logging websockets. Processes user data into graphs and calculated analytics.
 Sends requests for data with a UUID to the connected logging websocket.
 
+Message structure: {user: uuid, t: Date.now(), type: message_type, exp: exp_type, payload: payload}
+
 @author: dprydereid@gmail.com
 """
 
@@ -34,6 +36,10 @@ def on_message(ws, message):
             result = mes
             ws.send(json.dumps(result))    
 
+        ## else if the message is feedback from the user, including tags on the dashboard
+        elif(mes["type"] == "feedback"):
+            print("feedback received")
+
         else:
             print("log message not recognised")    
         
@@ -59,7 +65,8 @@ def on_open(ws):
 
 if __name__ == "__main__":
     
-    url = os.environ.get("SESSION_URL","ws://172.17.0.1:8888/ws/calibration")
+    #url = os.environ.get("SESSION_URL","ws://127.0.0.1:8888/")
+    url = "ws://localhost:8888/ws/logging"
 
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url,
