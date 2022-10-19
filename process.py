@@ -52,41 +52,58 @@ def GenerateGraph(user, exp):
         G = nx.from_pandas_adjacency(df, create_using=nx.DiGraph)
     else:
         G = nx.DiGraph()
-
-    G = PositionGraphNodes(G, 'spinner')
     
     return G
 
 
-def DrawGraph(user, exp):
+def DrawGraphHTML(user, exp):
     
     G = GenerateGraph(user, exp)
+    G = SetGraphProperties(G, 'spinner')
+    #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)
     g.from_nx(G)
     g.set_options("""
         var options = {
     "nodes": {
         "font": {
-        "color": "rgba(255,255,255,1)"
+        "color": "rgba(0,0,0,1)"
         }
     },
     "edges": {
         "color": {
         "inherit": true
         },
-        "smooth": false
+        "smooth": {
+            "forceDirection": "none",
+            "roundness": 1
+    }
     },
     "physics": {
         "minVelocity": 0.75
     }
     }
     """)
-    ## g.show_buttons()
-    g.save_graph('%s/%s-%s-graph.png' % (data_dir, user, exp))
+    #g.show_buttons()
+    g.save_graph('%s/%s-%s-graph.html' % (data_dir, user, exp))
 
-    # nx.draw(G, )
-    # plt.savefig('%s/%s-%s-graph.png' % (data_dir, user, exp))
-    # plt.show()
+
+def DrawGraphImage(user, exp):
+    
+    G = GenerateGraph(user, exp)
+
+    if(exp == "spinner"):
+        edge_labels = dict([((u,v), d['weight']) for u,v,d in G.edges(data=True)])
+        pos = {'voltage_step': [100,200*math.sin(math.pi/3)], 'voltage_ramp': [-100, 200*math.sin(math.pi/3)], 'position_step': [200, 0], 'position_ramp': [-200, 0], 'speed_step': [100, -200*math.sin(math.pi/3)], 'speed_ramp': [-100, -200*math.sin(math.pi/3)]}
+    
+    else:
+        edge_labels = dict()
+        pos = nx.spring_layout(G)
+    
+    nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels, label_pos=0.25, font_size=10)
+    #nx.draw(G, pos, with_labels=True, connectionstyle='arc3, rad = 0.15', node_size=800)
+    nx.draw(G, pos, with_labels=True)
+    plt.show()
 
 
 """
@@ -112,9 +129,10 @@ def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
         df = pd.DataFrame(matrix, nodes, nodes)
 
     ## add additional weight to the adjacency matrix
+    ## this order of the rows and columns is necessary to get the correct direction on graphs when drawing a graph
     for index, command in enumerate(command_array):
         if(index + 1 < len(command_array)):
-            df[command][command_array[index+1]] += 1
+            df[command_array[index+1]][command] += 1
 
     # output the updated csv to file
     df.to_csv('%s/%s-%s-adjacency.csv' % (data_dir, user, exp))
@@ -160,12 +178,19 @@ def GetCommandList(user, exp):
     return command_array
 
 
-def PositionGraphNodes(G, exp):
+def SetGraphProperties(G, exp):
     
     if(exp == 'spinner'):
         x = {'voltage_step': 100, 'voltage_ramp': -100, 'position_step': 200, 'position_ramp': -200, 'speed_step': 100, 'speed_ramp': -100 }
         y = {'voltage_step': -200*math.sin(math.pi/3), 'voltage_ramp': -200*math.sin(math.pi/3), 'position_step': 0, 'position_ramp': 0, 'speed_step': 200*math.sin(math.pi/3), 'speed_ramp': 200*math.sin(math.pi/3)}
         nx.set_node_attributes(G, x, 'x')
         nx.set_node_attributes(G, y, 'y')
+
+        #make sure physics doesn't shift the positions
+        nx.set_node_attributes(G, False, name='physics')
+
+        #ensure graph has labels of edge weights.
+        edge_labels = dict([((u,v), d['weight']) for u,v,d in G.edges(data=True)])
+        nx.set_edge_attributes(G, edge_labels, name='label')
 
     return G
