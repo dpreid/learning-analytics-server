@@ -9,6 +9,10 @@ Sends requests for data with a UUID to the connected logging websocket.
 
 Message structure: {user: uuid, t: Date.now(), type: message_type, exp: exp_type, payload: payload}
 
+TESTING by setting up local server and broadcasting
+websocat -t ws-l:127.0.0.1:8000 broadcast:mirror:
+
+
 @author: dprydereid@gmail.com
 """
 
@@ -20,7 +24,7 @@ import traceback
 import websocket
 
 def on_message(ws, message):
-    
+    print("on_message")
     try:
 
         mes = json.loads(message)
@@ -34,7 +38,7 @@ def on_message(ws, message):
             print("request")
             ## temp for now
             result = mes
-            ws.send(json.dumps(result))    
+            ws.send(json.dumps('received'))    
 
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
@@ -66,13 +70,9 @@ def on_open(ws):
 if __name__ == "__main__":
     
     #url = os.environ.get("SESSION_URL","ws://127.0.0.1:8888/")
-    ##url = "ws://localhost:8888/ws/logging"
-    url = 'wss://relay.practable.io/session/spin37-log'
+    url = "ws://127.0.0.1:8000"
 
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp(url,
-                              on_message=on_message,
-                              on_error=on_error,
-                              on_close=on_close)
+    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
 
     ws.run_forever()
