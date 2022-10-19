@@ -66,7 +66,8 @@ def on_open(ws):
 if __name__ == "__main__":
     
     #url = os.environ.get("SESSION_URL","ws://127.0.0.1:8888/")
-    url = "ws://localhost:8888/ws/logging"
+    ##url = "ws://localhost:8888/ws/logging"
+    url = 'wss://relay.practable.io/session/spin37-log'
 
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url,
