@@ -2,3 +2,5 @@ numpy>=1.21.5<2.0
 websocket-client>=1.2.3<2.0
 pandas>=1.0<2.0
 networkx>=2.6
+pyvis>=1.0
+matplotlib>1.0
