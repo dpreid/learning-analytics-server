@@ -12,12 +12,31 @@ Compares student to comparison graphs, using TaskDistance models.
 import pandas as pd
 from TaskDistance import TaskDistance
 
+
+"""
+Generates the JSON analytics response to send back to a user
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+
+"""
+def AnalyticsResponse(user, exp):
+    taskdistance_all = DistanceBetweenGraphs(user, pd.read_csv('/comparison_graphs/%s-all.csv' % exp, index_col=0), 10, 1)
+
+    return {"type":"response", "taskdistance": taskdistance_all}
+
 """
 Compares two graphs using the provided model for TaskDistance
 Outputs a TaskDistance dissimilarity value
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+comparison (Dataframe): the comparison adjacency matrix as a pandas Dataframe
+a, b, p, u, l (float): the TaskDistance model to use to calculate distance
 """
-def CompareTwoGraphs(user, comparison, a, b, p = 2, u = 2, l = -1):
-    return
+def DistanceBetweenGraphs(user, comparison, a, b, p = 2, u = 2, l = -1):
+
+    distance = TaskDistance(user, comparison, a, b, p, u, l)
+
+    return distance
 
 
 """

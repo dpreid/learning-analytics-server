@@ -1,0 +1,7 @@
+,voltage_step,voltage_ramp,position_step,position_ramp,speed_step,speed_ramp
+voltage_step,1.0,0.0,1.0,0.0,0.0,0.0
+voltage_ramp,0.0,0.0,0.0,0.0,0.0,0.0
+position_step,0.0,0.0,2.0,1.0,0.0,0.0
+position_ramp,0.0,0.0,1.0,3.0,0.0,0.0
+speed_step,0.0,0.0,0.0,0.0,0.0,0.0
+speed_ramp,0.0,0.0,0.0,0.0,0.0,0.0

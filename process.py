@@ -141,7 +141,7 @@ def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
     if(deleteLogFile):
         os.remove('%s/%s-%s.json' % (data_dir, user, exp))
 
-
+    return df
 
 """
 Generates a list of student commands from the user log file

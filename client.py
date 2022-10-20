@@ -22,6 +22,9 @@ import _thread
 import time
 import traceback
 import websocket
+import analytics
+import process
+import pandas as pd
 
 def on_message(ws, message):
     print("on_message")
@@ -30,19 +33,25 @@ def on_message(ws, message):
         mes = json.loads(message)
 
         ## if the message is a logging message from the UI then process this new log
+        ## No response sent from client
         if(mes["type"] == "log"):
-            print("logging")
+
+            process.AddUserLog(mes)
+
 
         ## else if the message is a request to return the analytics for a specific user then do..
+        ## user adjacency matrix as a dataframe is generated here and passed to analysis methods
         elif(mes["type"] == "request"):
-            print("request")
-            ## temp for now
-            result = mes
-            ws.send(json.dumps('received'))    
+            ##update this to reflect use of a single method to generate analytics
+            A = process.GenerateAdjacencyMatrix(mes["user"], mes["exp"])
+            response = analytics.AnalyticsResponse(A, mes["exp"])
+            
+            ws.send(json.dumps(response))    
 
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
-            print("feedback received")
+            response = {"type": "success", "response": "feedback_received"}
+            ws.send(json.dumps(response)) 
 
         else:
             print("log message not recognised")    

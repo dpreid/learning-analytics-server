@@ -1,0 +1,10 @@
+{"user": "expert", "t": 1657275054152, "payload": {"log": "voltage", "data": {"set": 0.1}}} 
+{"user": "expert", "t": 1657275054153, "payload": {"log": "voltage", "data": {"set": 0.2}}} 
+{"user": "expert", "t": 1657275054167, "payload": {"log": "position", "data": {"set": 6, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054170, "payload": {"log": "position", "data": {"set": 6, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054172, "payload": {"log": "position_ramp", "data": {"set": 1, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054182, "payload": {"log": "position_ramp", "data": {"set": 5, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054192, "payload": {"log": "position_ramp", "data": {"set": 1, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054202, "payload": {"log": "position_ramp", "data": {"set": 5, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054212, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} 
+{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} 
