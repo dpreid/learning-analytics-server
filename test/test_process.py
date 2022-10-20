@@ -72,7 +72,7 @@ class TestProcess(unittest.TestCase):
 
     
     def test_draw_graph_html(self):
-        process.DrawGraphHTML('1234', 'spinner')
+        process.SaveGraphHTML('1234', 'spinner')
 
     # def test_draw_graph_image(self):
     #     process.DrawGraphImage('1234', 'spinner')
