@@ -20,7 +20,7 @@ user (Dataframe): user adjacency matrix as a pandas Dataframe
 
 """
 def AnalyticsResponse(user, exp):
-    taskdistance_all = DistanceBetweenGraphs(user, pd.read_csv('/comparison_graphs/%s-all.csv' % exp, index_col=0), 10, 1)
+    taskdistance_all = DistanceBetweenGraphs(user, pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0), 10, 1)
 
     return {"type":"response", "taskdistance": taskdistance_all}
 

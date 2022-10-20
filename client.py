@@ -45,7 +45,7 @@ def on_message(ws, message):
             ##update this to reflect use of a single method to generate analytics
             A = process.GenerateAdjacencyMatrix(mes["user"], mes["exp"])
             response = analytics.AnalyticsResponse(A, mes["exp"])
-            
+            print(response)
             ws.send(json.dumps(response))    
 
         ## else if the message is feedback from the user, including tags on the dashboard

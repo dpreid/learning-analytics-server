@@ -30,9 +30,11 @@ class TestProcess(unittest.TestCase):
 
 
     def test_command_list(self):
-        array = process.GetCommandList('1234', 'spinner')
-        self.assertEqual(len(array), 10)
-
+        array, last_line = process.GetCommandList('1234', 'spinner')
+        with self.subTest():
+            self.assertEqual(len(array), 10)
+        with self.subTest():
+            self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
 
 
     def test_generate_matrix(self):

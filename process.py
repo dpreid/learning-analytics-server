@@ -114,7 +114,7 @@ If the matrix already exists, then it adds the log file to that matrix.
 Once the matrix is updated it will delete the log file
 """
 def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
-    command_array = GetCommandList(user, exp)
+    command_array, last_line = GetCommandList(user, exp)
 
     if(exp == "spinner"):
         nodes = ['voltage_step', 'voltage_ramp', 'position_step', 'position_ramp', 'speed_step', 'speed_ramp']
@@ -137,45 +137,51 @@ def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
     # output the updated csv to file
     df.to_csv('%s/%s-%s-adjacency.csv' % (data_dir, user, exp))
 
-    # remove the user log file
-    if(deleteLogFile):
+    # for storage reasons do not store the complete json log list
+    # need to maintain the latest command however to generate the correct edge for the next mode set
+    if(os.path.isfile('%s/%s-%s.json' % (data_dir, user, exp)) and deleteLogFile):
         os.remove('%s/%s-%s.json' % (data_dir, user, exp))
+        with open('%s/%s-%s.json' % (data_dir, user, exp), 'a') as f:
+            f.write(last_line)
 
     return df
 
 """
 Generates a list of student commands from the user log file
 Returns and array of commands sent to hardware
+Also returns the last line of the command list for storage
 """
 def GetCommandList(user, exp):
     command_array = []
+    last_line = ''
+    if(os.path.isfile('%s/%s-%s.json' % (data_dir, user, exp))):
+        with open('%s/%s-%s.json' % (data_dir, user, exp)) as f:
+            lines = f.readlines()
+            for line in lines:
+                if len(line)>1:
+                    try:
+                        log_data = json.loads(line)
+                        #command sent
+                        if(log_data["payload"]["log"] == 'voltage'):
+                            command_array.append('voltage_step')
+                        elif(log_data["payload"]["log"] == 'voltage_ramp'):
+                            command_array.append('voltage_ramp')
+                        elif(log_data["payload"]["log"] == 'position'):
+                            command_array.append('position_step')
+                        elif(log_data["payload"]["log"] == 'position_ramp'):
+                            command_array.append('position_ramp')
+                        elif(log_data["payload"]["log"] == 'speed'):
+                            command_array.append('speed_step')
+                        elif(log_data["payload"]["log"] == 'speed_ramp'):
+                            command_array.append('speed_ramp')
+                        else:
+                            pass
 
-    with open('%s/%s-%s.json' % (data_dir, user, exp)) as f:
-        lines = f.readlines()
-        for line in lines:
-            if len(line)>1:
-                try:
-                    log_data = json.loads(line)
-                    #command sent
-                    if(log_data["payload"]["log"] == 'voltage'):
-                        command_array.append('voltage_step')
-                    elif(log_data["payload"]["log"] == 'voltage_ramp'):
-                        command_array.append('voltage_ramp')
-                    elif(log_data["payload"]["log"] == 'position'):
-                        command_array.append('position_step')
-                    elif(log_data["payload"]["log"] == 'position_ramp'):
-                        command_array.append('position_ramp')
-                    elif(log_data["payload"]["log"] == 'speed'):
-                        command_array.append('speed_step')
-                    elif(log_data["payload"]["log"] == 'speed_ramp'):
-                        command_array.append('speed_ramp')
-                    else:
+                    except:
                         pass
-
-                except:
-                    pass
+            last_line = line
     
-    return command_array
+    return command_array, last_line
 
 
 def SetGraphProperties(G, exp):
