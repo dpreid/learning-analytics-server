@@ -42,15 +42,14 @@ def on_message(ws, message):
         ## else if the message is a request to return the analytics for a specific user then do..
         ## user adjacency matrix as a dataframe is generated here and passed to analysis methods
         elif(mes["type"] == "request"):
+            user = mes['user']
+            exp = mes['exp']
             ##update this to reflect use of a single method to generate analytics
-            # A = process.GenerateAdjacencyMatrix(mes["user"], mes["exp"])
-            # response = analytics.AnalyticsResponse(A, mes["exp"])
-            # print(response)
-            # ws.send(json.dumps(response))    
-            nodes, edges = process.GetGraphComponents(mes["user"], mes["exp"])
-            response = {"nodes": nodes, "edges": edges}
-            ws.send(json.dumps(response)) 
-
+            A = process.GenerateAdjacencyMatrix(user, exp)
+            response = analytics.AnalyticsResponse(A, user, exp)
+            
+            ws.send(json.dumps(response))
+            
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
             response = {"type": "success", "response": "feedback_received"}
