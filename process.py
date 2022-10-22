@@ -63,28 +63,28 @@ def SaveGraphHTML(user, exp):
     #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)
     g.from_nx(G)
-    g.set_options("""
-        var options = {
-    "nodes": {
-        "font": {
-        "color": "rgba(0,0,0,1)"
-        }
-    },
-    "edges": {
-        "color": {
-        "inherit": true
-        },
-        "smooth": {
-            "forceDirection": "none",
-            "roundness": 1
-    }
-    },
-    "physics": {
-        "minVelocity": 0.75
-    }
-    }
-    """)
-    #g.show_buttons()
+    # g.set_options("""
+    #     var options = {
+    # "nodes": {
+    #     "font": {
+    #     "color": "rgba(0,0,0,1)"
+    #     }
+    # },
+    # "edges": {
+    #     "color": {
+    #     "inherit": true
+    #     },
+    #     "smooth": {
+    #         "forceDirection": "none",
+    #         "roundness": 1
+    # }
+    # },
+    # "physics": {
+    #     "minVelocity": 0.75
+    # }
+    # }
+    # """)
+    g.show_buttons()
     g.save_graph('%s/%s-%s-graph.html' % (data_dir, user, exp))
 
 def GetGraphComponents(user, exp):
@@ -208,7 +208,7 @@ def SetGraphProperties(G, exp):
         nx.set_node_attributes(G, False, name='physics')
 
         #ensure graph has labels of edge weights.
-        edge_labels = dict([((u,v), d['weight']) for u,v,d in G.edges(data=True)])
+        edge_labels = dict([((u,v), str(int(d['weight']))) for u,v,d in G.edges(data=True)])
         nx.set_edge_attributes(G, edge_labels, name='label')
 
     return G
