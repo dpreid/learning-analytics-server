@@ -24,6 +24,7 @@ import traceback
 import websocket
 import analytics
 import process
+import response
 import pandas as pd
 
 def on_message(ws, message):
@@ -46,14 +47,22 @@ def on_message(ws, message):
             exp = mes['exp']
             ##update this to reflect use of a single method to generate analytics
             A = process.GenerateAdjacencyMatrix(user, exp)
-            response = analytics.AnalyticsResponse(A, user, exp)
+
+            ## if requesting a graph do something
+
+            ## if requesting task identification do something
+
+            ##if requesting exploration data do something
+
+
+            res = response.TestResponse(A, user, exp)
             
-            ws.send(json.dumps(response))
+            ws.send(json.dumps(res))
             
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
-            response = {"type": "success", "response": "feedback_received"}
-            ws.send(json.dumps(response)) 
+            res = {"type": "success", "response": "feedback_received"}
+            ws.send(json.dumps(res)) 
 
         else:
             print("log message not recognised")    

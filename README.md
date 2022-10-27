@@ -13,6 +13,7 @@ For receiving logging messages from a remote lab UI the format should be:
 {user: uuid, 
 t: 1234567, 
 type: "log", 
+exp: "spinner",
 payload: payload}
 ```
 

@@ -1,6 +1,7 @@
 FROM python:3.7-slim
 ADD analytics.py /
 ADD process.py /
+ADD response.py /
 ADD TaskDistance.py /
 ADD client.py /
 # ENV WEBSOCKET ws://172.17.0.1:8888/ws/calibration

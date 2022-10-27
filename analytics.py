@@ -12,19 +12,9 @@ Compares student to comparison graphs, using TaskDistance models.
 import pandas as pd
 from TaskDistance import TaskDistance
 import process
+import os
+from pathlib import Path
 
-"""
-Generates the JSON analytics response to send back to a user
-
-user (Dataframe): user adjacency matrix as a pandas Dataframe
-
-"""
-def AnalyticsResponse(user_A, user_id, exp):
-    taskdistance_all = DistanceBetweenGraphs(user_A, pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0), 10, 1)
-    nodes, edges = process.GetGraphComponents(user_id, exp)
-    response = {"user": user_id, "type":"response", "nodes": nodes, "edges": edges, "taskdistance": taskdistance_all}
-
-    return response
 
 """
 Compares two graphs using the provided model for TaskDistance
@@ -42,15 +32,32 @@ def DistanceBetweenGraphs(user, comparison, a, b, p = 2, u = 2, l = -1):
 
 
 """
-Identifies the closest comparison graph with the specified model of TaskDistance
-Returns that closest graph name
+Returns TaskDistance to each comparison model.
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+exp (string): name of the experiment
+
 """
-def TaskIdentification(user, comparison, a = 10, b = 1, p = 2, u = 2, l = -1):
-    return
+def TaskIdentification(user, exp, a = 10, b = 1, p = 2, u = 2, l = -1):
+    td = {}
+    for file in os.listdir('./comparison_graphs'):
+        if file.startswith(exp):
+            task_name = Path(file).stem
+            comp = pd.read_csv('./comparison_graphs/%s' % file, index_col=0)
+            task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
+            td[task_name] = task_dist
+    
+    return td
 
 
 """
 Returns a value for student exploration of hardware space, based on the exploration model of TaskDistance
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+exp (string): name of the experiment
 """
-def Exploration(user, comparison, a = 0, b = 10, p = 2, u = 2, l = -1):
-    return
+def Exploration(user, exp, a = 0, b = 10, p = 2, u = 2, l = -1):
+    comp = pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0)
+    task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
+    
+    return task_dist
