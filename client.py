@@ -55,7 +55,7 @@ def on_message(ws, message):
             ##if requesting exploration data do something
 
 
-            res = response.TestResponse(A, user, exp)
+            res = response.TaskCompletionResponse(A, user, exp)
             
             ws.send(json.dumps(res))
             
