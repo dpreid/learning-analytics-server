@@ -64,7 +64,7 @@ exp (string): the remote lab hardware
 """
 def TaskCompletionResponse(user_A, user_id, exp):
     task_dists = analytics.TaskIdentification(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "tasks": task_dists}
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"task_identification", "tasks": task_dists}
 
     return response
 
@@ -76,9 +76,9 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def ExplorationResponse(user_A, user_id, exp):
+def IndicatorResponse(user_A, user_id, exp):
     exploration = analytics.Exploration(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "exploration": exploration}
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"indicators", "indicators": {"exploration": exploration}}
 
     return response
 
