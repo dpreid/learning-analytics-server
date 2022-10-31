@@ -45,19 +45,25 @@ def on_message(ws, message):
         elif(mes["type"] == "request"):
             user = mes['user']
             exp = mes['exp']
+            content = mes['content']
             ##update this to reflect use of a single method to generate analytics
             A = process.GenerateAdjacencyMatrix(user, exp)
 
             ## if requesting a graph do something
+            if(content == 'student_graph'):
+                res = response.StudentGraphResponse(user, exp)
+                ws.send(json.dumps(res))
+            elif(content == 'spinner-all'):
+                res = response.ComparisonGraphResponse(content, user, exp)
+                ws.send(json.dumps(res))
 
             ## if requesting task identification do something
-
+            elif(content == 'task_identification'):
+                res = response.TaskCompletionResponse(A, user, exp)
+                ws.send(json.dumps(res))
             ##if requesting exploration data do something
 
-
-            res = response.TaskCompletionResponse(A, user, exp)
             
-            ws.send(json.dumps(res))
             
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):

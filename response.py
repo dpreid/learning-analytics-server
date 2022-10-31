@@ -37,7 +37,20 @@ exp (string): the remote lab hardware
 """
 def StudentGraphResponse(user_id, exp):
     nodes, edges = process.GetGraphComponents(user_id, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "nodes": nodes, "edges": edges}
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"student_graph", "nodes": nodes, "edges": edges}
+
+    return response
+
+"""
+Generates the JSON response to send back to a user for a comparison graph request
+
+comparison (string): the comparison task model to return
+exp (string): the remote lab hardware
+
+"""
+def ComparisonGraphResponse(comparison, user_id, exp):
+    nodes, edges = process.GetComparisonGraphComponents(comparison, exp)
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"comparison_graph", "nodes": nodes, "edges": edges}
 
     return response
 

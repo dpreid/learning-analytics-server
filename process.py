@@ -99,6 +99,19 @@ def GetGraphComponents(user, exp):
     
     return nodes, edges
 
+def GetComparisonGraphComponents(comparison, exp):
+    print('doing')
+    df = pd.read_csv('./comparison_graphs/%s.csv' % comparison, index_col=0)
+    G = nx.from_pandas_adjacency(df, create_using=nx.DiGraph)
+    G = SetGraphProperties(G, exp)
+    #print(G.edges(data=True))
+    g=Network(height=800,width=800,notebook=False, directed=True)
+    g.from_nx(G)
+    
+    nodes, edges, heading, height, width, options = g.get_network_data()
+    
+    return nodes, edges
+
 
 def DrawGraphImage(user, exp):
     
