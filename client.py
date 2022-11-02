@@ -69,8 +69,8 @@ def on_message(ws, message):
             
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
-            res = {"type": "success", "response": "feedback_received"}
-            ws.send(json.dumps(res)) 
+            print(payload['state'])
+            print(payload['subject'])
 
         else:
             print("log message not recognised")    
