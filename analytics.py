@@ -61,3 +61,16 @@ def Exploration(user, exp, a = 0, b = 10, p = 2, u = 2, l = -1):
     task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
     
     return task_dist
+
+"""
+Returns a value for centroid of student graph and centroids for specific tasks
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+exp (string): name of the experiment
+"""
+def Centroid(user, exp):
+    print(user)
+    if(exp == 'spinner'):
+        return {"student": [0.5,0.5], "task1": [1,1], "task3": [0,0], "task4": [-1,0]}
+    else:
+        return {"student": [0,0], "task1": [0,0], "task3": [0,0], "task4": [0,0]} 

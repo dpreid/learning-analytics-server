@@ -82,3 +82,17 @@ def IndicatorResponse(user_A, user_id, exp):
 
     return response
 
+"""
+Generates the JSON response to send back to a user for a centroid request
+
+user_A (Dataframe): user adjacency matrix as a pandas Dataframe
+user_id (string): user UUID
+exp (string): the remote lab hardware
+
+"""
+def CentroidResponse(user_A, user_id, exp):
+    centroids = analytics.Centroid(user_A, exp)
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"centroid", "centroids": centroids}
+
+    return response
+
