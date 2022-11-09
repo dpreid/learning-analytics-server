@@ -28,7 +28,6 @@ import response
 import pandas as pd
 
 def on_message(ws, message):
-    print("on_message")
     try:
 
         mes = json.loads(message)
@@ -64,6 +63,10 @@ def on_message(ws, message):
             ##if requesting indicator (e.g. exploration) data do something
             elif(payload['content'] == 'indicators'):
                 res = response.IndicatorResponse(A, user, exp)
+                ws.send(json.dumps(res))
+
+            elif(payload['content'] == 'centroids'):
+                res = response.CentroidResponse(A, user, exp)
                 ws.send(json.dumps(res))
             
             

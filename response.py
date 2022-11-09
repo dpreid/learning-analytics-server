@@ -92,7 +92,7 @@ exp (string): the remote lab hardware
 """
 def CentroidResponse(user_A, user_id, exp):
     centroids = analytics.Centroid(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"centroid", "centroids": centroids}
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"centroids", "centroids": centroids}
 
     return response
 
