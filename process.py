@@ -41,6 +41,33 @@ def AddUserLog(message):
         pass
 
 """
+Takes a new log message and adds it to the appropriate user log file
+message is already in json format and been loaded into json previously
+"""
+def AddUserFeedback(message):
+    try:
+        user = message["user"]
+        exp = message["exp"]
+        filename = '%s-%s-feedback.csv' % (user, exp)
+        new_state = message['payload']['state']
+        new_subject = message['payload']['subject']
+        # if an adjacency matrix for a user already exists, then add new data to that
+        if(os.path.isfile('%s/%s' % (data_dir, filename))):
+            df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
+        else:
+            states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated']
+            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'Tasks', 'Feedback']
+            matrix = np.zeros(shape=(len(states), len(subjects)))
+            df = pd.DataFrame(matrix, states, subjects)
+            
+        df[new_subject][new_state] += 1
+        df.to_csv('%s/%s-%s-feedback.csv' % (data_dir, user, exp))
+        
+    except:
+        print('error adding feedback')
+        pass
+
+"""
 Creates a visual representation of a user graph from a user adjacency matrix
 
 Returns a graph representing student data or an empty graph if no data is present.
@@ -226,3 +253,14 @@ def SetGraphProperties(G, exp):
         nx.set_edge_attributes(G, edge_labels, name='label')
 
     return G
+
+
+def GetUserFeedback(user_id, exp):
+    if(os.path.isfile('%s/%s-%s-feedback.csv' % (data_dir, user_id, exp))):
+        df = pd.read_csv('%s/%s-%s-feedback.csv' % (data_dir, user_id, exp), index_col=0)
+        exists = True
+    else:
+        df = pd.DataFrame()
+        exists = False
+
+    return df, exists

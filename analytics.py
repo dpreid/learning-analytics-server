@@ -62,6 +62,35 @@ def Exploration(user, exp, a = 0, b = 10, p = 2, u = 2, l = -1):
     
     return task_dist
 
+"""
+Returns a value for student enjoyment of the lab as a sum of positive and negative responses to the lab
+
+user (Dataframe): user adjacency matrix as a pandas Dataframe
+exp (string): name of the experiment
+"""
+def Enjoyment(user_id, exp):
+    feedback, exists = process.GetUserFeedback(user_id, exp)
+    ## get sum of positive responses
+    positive = 0
+    negative = 0
+    if(exists):
+        positive += feedback.loc['Engaged'].sum()
+        positive += feedback.loc['Curious'].sum()
+        positive += feedback.loc['Interested'].sum()
+        positive += feedback.loc['Excited'].sum()
+        positive += feedback.loc['Satisfied'].sum()
+        ## get sum of negative responses
+        negative += feedback.loc['Dissatisfied'].sum()
+        negative += feedback.loc['Bored'].sum()
+        negative += feedback.loc['Confused'].sum()
+        negative += feedback.loc['Uninterested'].sum()
+        negative += feedback.loc['Frustrated'].sum()
+
+    return positive-negative
+    
+    
+    
+
 
 """Takes an adjacency matrix representation of a graph and the index of the node we want to calculate mass for.
 

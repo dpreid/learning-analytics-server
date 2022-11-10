@@ -79,7 +79,8 @@ exp (string): the remote lab hardware
 """
 def IndicatorResponse(user_A, user_id, exp):
     exploration = analytics.Exploration(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"indicators", "indicators": {"exploration": exploration}}
+    enjoyment = analytics.Enjoyment(user_id, exp)
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"indicators", "indicators": {"exploration": exploration, "enjoyment": enjoyment}}
 
     return response
 

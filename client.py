@@ -31,7 +31,7 @@ def on_message(ws, message):
     try:
 
         mes = json.loads(message)
-
+        
         ## if the message is a logging message from the UI then process this new log
         ## No response sent from client
         if(mes["type"] == "log"):
@@ -72,8 +72,8 @@ def on_message(ws, message):
             
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
-            print(payload['state'])
-            print(payload['subject'])
+            print('logging feedback')
+            process.AddUserFeedback(mes)
 
         else:
             print("log message not recognised")    
