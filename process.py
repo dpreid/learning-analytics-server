@@ -91,26 +91,27 @@ def GetGraphComponents(user, exp):
     
     G = GenerateGraph(user, exp)
     G = SetGraphProperties(G, exp)
+    in_centrality = nx.in_degree_centrality(G)
     #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)
     g.from_nx(G)
     
     nodes, edges, heading, height, width, options = g.get_network_data()
-    
-    return nodes, edges
+    node_info = {"in_centrality": in_centrality}
+    return nodes, edges, node_info
 
 def GetComparisonGraphComponents(comparison, exp):
-    print('doing')
     df = pd.read_csv('./comparison_graphs/%s.csv' % comparison, index_col=0)
     G = nx.from_pandas_adjacency(df, create_using=nx.DiGraph)
     G = SetGraphProperties(G, exp)
+    in_centrality = nx.in_degree_centrality(G)
     #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)
     g.from_nx(G)
     
     nodes, edges, heading, height, width, options = g.get_network_data()
-    
-    return nodes, edges
+    node_info = {"in_centrality": in_centrality}
+    return nodes, edges, node_info
 
 
 def DrawGraphImage(user, exp):

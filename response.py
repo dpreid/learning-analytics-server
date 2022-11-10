@@ -36,8 +36,9 @@ exp (string): the remote lab hardware
 
 """
 def StudentGraphResponse(user_id, exp):
-    nodes, edges = process.GetGraphComponents(user_id, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"student_graph", "nodes": nodes, "edges": edges}
+    nodes, edges, node_info = process.GetGraphComponents(user_id, exp)
+    
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"student_graph", "nodes": nodes, "edges": edges, "node_info": node_info}
 
     return response
 
@@ -49,8 +50,8 @@ exp (string): the remote lab hardware
 
 """
 def ComparisonGraphResponse(comparison, user_id, exp):
-    nodes, edges = process.GetComparisonGraphComponents(comparison, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"comparison_graph", "nodes": nodes, "edges": edges}
+    nodes, edges, node_info = process.GetComparisonGraphComponents(comparison, exp)
+    response = {"user": user_id, "type":"response", "exp": exp, "content":"comparison_graph", "nodes": nodes, "edges": edges, "node_info": node_info}
 
     return response
 
