@@ -57,10 +57,15 @@ user (Dataframe): user adjacency matrix as a pandas Dataframe
 exp (string): name of the experiment
 """
 def Exploration(user, exp, a = 0, b = 10, p = 2, u = 2, l = -1):
-    comp = pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0)
-    task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
+    try:
+        comp = pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0)
+        task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
+
+        return task_dist
+    except:
+        print('no full task to compare to')
+        return 0
     
-    return task_dist
 
 """
 Returns a value for student enjoyment of the lab as a sum of positive and negative responses to the lab
@@ -158,6 +163,23 @@ def Centroid(user, exp):
         all = graphCentroid(pd.read_csv('./comparison_graphs/spinner-all.csv', index_col=0), vertex_positions)
 
         return {"student": student, "task1": task1, "task3": task3, "task4": task4, "all": all, "vertices": vertex_positions}
+    
+    elif(exp == 'pendulum'):
+        vertex_positions = [{'name':'brake', 'x':0.5,'y':1}, 
+                            {'name':'free', 'x':1,'y':0.5}, 
+                            {'name':'load', 'x':1,'y':-0.5}, 
+                            {'name':'sampling', 'x':0.5,'y':-1}, 
+                            {'name':'drive_perc', 'x':-0.5,'y':-1}, 
+                            {'name':'brake_perc', 'x':-1,'y':-0.5},
+                            {'name':'measuring_tools', 'x':-1,'y':0.5},
+                            {'name':'start', 'x':-0.5,'y':1}]
+
+        student = graphCentroid(user, vertex_positions)
+        task1 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-1.csv', index_col=0), vertex_positions)
+        task2 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-2.csv', index_col=0), vertex_positions)
+        
+
+        return {"student": student, "task1": task1, "task2": task2, "vertices": vertex_positions}
 
     else:
 

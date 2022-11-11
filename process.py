@@ -168,9 +168,11 @@ Once the matrix is updated it will delete the log file
 """
 def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
     command_array, last_line = GetCommandList(user, exp)
-
+    print(command_array)
     if(exp == "spinner"):
         nodes = ['voltage_step', 'voltage_ramp', 'position_step', 'position_ramp', 'speed_step', 'speed_ramp']
+    elif(exp == "pendulum"):
+        nodes = ['start','brake','load','free','sampling','drive_perc','brake_perc','measuring_tools']
     else:
         nodes = []
 
@@ -227,6 +229,22 @@ def GetCommandList(user, exp):
                             command_array.append('speed_step')
                         elif(log_data["payload"]["log"] == 'speed_ramp'):
                             command_array.append('speed_ramp')
+                        elif(log_data["payload"]["log"] == 'start'):
+                            command_array.append('start')
+                        elif(log_data["payload"]["log"] == 'brake'):
+                            command_array.append('brake')
+                        elif(log_data["payload"]["log"] == 'free'):
+                            command_array.append('free')
+                        elif(log_data["payload"]["log"] == 'load'):
+                            command_array.append('load')
+                        elif(log_data["payload"]["log"] == 'sampling'):
+                            command_array.append('sampling')
+                        elif(log_data["payload"]["log"] == 'drive_perc'):
+                            command_array.append('drive_perc')
+                        elif(log_data["payload"]["log"] == 'brake_perc'):
+                            command_array.append('brake_perc')
+                        elif(log_data["payload"]["log"] == 'measuring_tools'):
+                            command_array.append('measuring_tools')
                         else:
                             pass
 
@@ -242,6 +260,19 @@ def SetGraphProperties(G, exp):
     if(exp == 'spinner'):
         x = {'voltage_step': 100, 'voltage_ramp': -100, 'position_step': 200, 'position_ramp': -200, 'speed_step': 100, 'speed_ramp': -100 }
         y = {'voltage_step': -200*math.sin(math.pi/3), 'voltage_ramp': -200*math.sin(math.pi/3), 'position_step': 0, 'position_ramp': 0, 'speed_step': 200*math.sin(math.pi/3), 'speed_ramp': 200*math.sin(math.pi/3)}
+        nx.set_node_attributes(G, x, 'x')
+        nx.set_node_attributes(G, y, 'y')
+
+        #make sure physics doesn't shift the positions
+        nx.set_node_attributes(G, False, name='physics')
+
+        #ensure graph has labels of edge weights.
+        edge_labels = dict([((u,v), str(int(d['weight']))) for u,v,d in G.edges(data=True)])
+        nx.set_edge_attributes(G, edge_labels, name='label')
+
+    elif(exp == 'pendulum'):
+        x = {'start': -100, 'brake': 100, 'free': 200, 'load': 200, 'sampling': 100, 'drive_perc': -100, 'brake_perc': -200, 'measuring_tools': -200}
+        y = {'start': 200, 'brake': 200, 'free': 100, 'load': -100, 'sampling': -200, 'drive_perc': -200, 'brake_perc': -100, 'measuring_tools': 100}
         nx.set_node_attributes(G, x, 'x')
         nx.set_node_attributes(G, y, 'y')
 
