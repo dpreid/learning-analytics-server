@@ -58,7 +58,14 @@ def AddUserFeedback(message):
             df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         else:
             states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated']
-            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'Tasks', 'Feedback']
+            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'UI', 'LA']
+            if(course == 'cie3'):
+                subjects.push('spinner-cie3-1-2')
+                subjects.push('spinner-cie3-3')
+                subjects.push('spinner-cie3-4')
+            elif(course == 'engdes1'):
+                subjects.push('pendulum-engdes1-1')
+                subjects.push('pendulum-engdes1-2')
             matrix = np.zeros(shape=(len(states), len(subjects)))
             df = pd.DataFrame(matrix, states, subjects)
             
