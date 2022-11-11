@@ -30,7 +30,8 @@ def AddUserLog(message):
     try:
         user = message["user"]
         exp = message["exp"]
-        filename = '%s-%s.json' % (user, exp)
+        course = message['course']
+        filename = '%s-%s-%s.json' % (user, exp, course)
 
         with open('%s/%s' % (data_dir, filename), 'a') as outfile:
             d = json.dumps(message)
@@ -48,7 +49,8 @@ def AddUserFeedback(message):
     try:
         user = message["user"]
         exp = message["exp"]
-        filename = '%s-%s-feedback.csv' % (user, exp)
+        course = message['course']
+        filename = '%s-%s-%s-feedback.csv' % (user, exp, course)
         new_state = message['payload']['state']
         new_subject = message['payload']['subject']
         # if an adjacency matrix for a user already exists, then add new data to that
@@ -61,7 +63,7 @@ def AddUserFeedback(message):
             df = pd.DataFrame(matrix, states, subjects)
             
         df[new_subject][new_state] += 1
-        df.to_csv('%s/%s-%s-feedback.csv' % (data_dir, user, exp))
+        df.to_csv('%s/%s' % (data_dir, filename))
         
     except:
         print('error adding feedback')
@@ -72,10 +74,10 @@ Creates a visual representation of a user graph from a user adjacency matrix
 
 Returns a graph representing student data or an empty graph if no data is present.
 """
-def GenerateGraph(user, exp):
-    
-    if(os.path.isfile('%s/%s-%s-adjacency.csv' % (data_dir, user, exp))):
-        df = pd.read_csv('%s/%s-%s-adjacency.csv' % (data_dir, user, exp), index_col=0)
+def GenerateGraph(user, exp, course):
+    filename = '%s-%s-%s-adjacency.csv' % (user, exp, course)
+    if(os.path.isfile('%s/%s' % (data_dir, filename))):
+        df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         G = nx.from_pandas_adjacency(df, create_using=nx.DiGraph)
     else:
         G = nx.DiGraph()
@@ -83,6 +85,7 @@ def GenerateGraph(user, exp):
     return G
 
 
+## Not used anymore
 def SaveGraphHTML(user, exp):
     
     G = GenerateGraph(user, exp)
@@ -114,9 +117,9 @@ def SaveGraphHTML(user, exp):
     g.show_buttons()
     g.save_graph('%s/%s-%s-graph.html' % (data_dir, user, exp))
 
-def GetGraphComponents(user, exp):
+def GetGraphComponents(user, exp, course):
     
-    G = GenerateGraph(user, exp)
+    G = GenerateGraph(user, exp, course)
     G = SetGraphProperties(G, exp)
     in_centrality = nx.in_degree_centrality(G)
     #print(G.edges(data=True))
@@ -140,7 +143,7 @@ def GetComparisonGraphComponents(comparison, exp):
     node_info = {"in_centrality": in_centrality}
     return nodes, edges, node_info
 
-
+## Not used
 def DrawGraphImage(user, exp):
     
     G = GenerateGraph(user, exp)
@@ -166,8 +169,8 @@ If the matrix already exists, then it adds the log file to that matrix.
 
 Once the matrix is updated it will delete the log file
 """
-def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
-    command_array, last_line = GetCommandList(user, exp)
+def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
+    command_array, last_line = GetCommandList(user, exp, course)
     print(command_array)
     if(exp == "spinner"):
         nodes = ['voltage_step', 'voltage_ramp', 'position_step', 'position_ramp', 'speed_step', 'speed_ramp']
@@ -177,8 +180,9 @@ def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
         nodes = []
 
     # if an adjacency matrix for a user already exists, then add new data to that
-    if(os.path.isfile('%s/%s-%s-adjacency.csv' % (data_dir, user, exp))):
-        df = pd.read_csv('%s/%s-%s-adjacency.csv' % (data_dir, user, exp), index_col=0)
+    filename = '%s-%s-%s-adjacency.csv' % (user, exp, course)
+    if(os.path.isfile('%s/%s' % (data_dir, filename))):
+        df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
     else:
         matrix = np.zeros(shape=(len(nodes), len(nodes)))
         df = pd.DataFrame(matrix, nodes, nodes)
@@ -190,13 +194,13 @@ def GenerateAdjacencyMatrix(user, exp, deleteLogFile = True):
             df[command_array[index+1]][command] += 1
 
     # output the updated csv to file
-    df.to_csv('%s/%s-%s-adjacency.csv' % (data_dir, user, exp))
+    df.to_csv('%s/%s' % (data_dir, filename))
 
     # for storage reasons do not store the complete json log list
     # need to maintain the latest command however to generate the correct edge for the next mode set
-    if(os.path.isfile('%s/%s-%s.json' % (data_dir, user, exp)) and deleteLogFile):
-        os.remove('%s/%s-%s.json' % (data_dir, user, exp))
-        with open('%s/%s-%s.json' % (data_dir, user, exp), 'a') as f:
+    if(os.path.isfile('%s/%s-%s-%s.json' % (data_dir, user, exp, course)) and deleteLogFile):
+        os.remove('%s/%s-%s-%s.json' % (data_dir, user, exp, course))
+        with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course), 'a') as f:
             f.write(last_line)
 
     return df
@@ -206,11 +210,11 @@ Generates a list of student commands from the user log file
 Returns and array of commands sent to hardware
 Also returns the last line of the command list for storage
 """
-def GetCommandList(user, exp):
+def GetCommandList(user, exp, course):
     command_array = []
     last_line = ''
-    if(os.path.isfile('%s/%s-%s.json' % (data_dir, user, exp))):
-        with open('%s/%s-%s.json' % (data_dir, user, exp)) as f:
+    if(os.path.isfile('%s/%s-%s-%s.json' % (data_dir, user, exp, course))):
+        with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course)) as f:
             lines = f.readlines()
             for line in lines:
                 if len(line)>1:
@@ -286,9 +290,10 @@ def SetGraphProperties(G, exp):
     return G
 
 
-def GetUserFeedback(user_id, exp):
-    if(os.path.isfile('%s/%s-%s-feedback.csv' % (data_dir, user_id, exp))):
-        df = pd.read_csv('%s/%s-%s-feedback.csv' % (data_dir, user_id, exp), index_col=0)
+def GetUserFeedback(user_id, exp, course):
+    filename = '%s-%s-%s-feedback.csv' % (user_id, exp, course)
+    if(os.path.isfile('%s/%s' % (data_dir, filename))):
+        df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         exists = True
     else:
         df = pd.DataFrame()

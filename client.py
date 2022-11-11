@@ -44,13 +44,14 @@ def on_message(ws, message):
         elif(mes["type"] == "request"):
             user = mes['user']
             exp = mes['exp']
+            course = mes['course']
             payload = mes['payload']
             ##update this to reflect use of a single method to generate analytics
-            A = process.GenerateAdjacencyMatrix(user, exp)
+            A = process.GenerateAdjacencyMatrix(user, exp, course)
 
             ## if requesting a graph do something
             if(payload['content'] == 'student_graph'):
-                res = response.StudentGraphResponse(user, exp)
+                res = response.StudentGraphResponse(user, exp, course)
                 ws.send(json.dumps(res))
             elif(payload['content'] == 'comparison_graph'):
                 res = response.ComparisonGraphResponse(payload['graph'], user, exp)
@@ -58,15 +59,15 @@ def on_message(ws, message):
 
             ## if requesting task identification do something
             elif(payload['content'] == 'task_identification'):
-                res = response.TaskCompletionResponse(A, user, exp)
+                res = response.TaskCompletionResponse(A, user, exp, course)
                 ws.send(json.dumps(res))
             ##if requesting indicator (e.g. exploration) data do something
             elif(payload['content'] == 'indicators'):
-                res = response.IndicatorResponse(A, user, exp)
+                res = response.IndicatorResponse(A, user, exp, course)
                 ws.send(json.dumps(res))
 
             elif(payload['content'] == 'centroids'):
-                res = response.CentroidResponse(A, user, exp)
+                res = response.CentroidResponse(A, user, exp, course)
                 ws.send(json.dumps(res))
             
             

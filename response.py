@@ -35,10 +35,10 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def StudentGraphResponse(user_id, exp):
-    nodes, edges, node_info = process.GetGraphComponents(user_id, exp)
+def StudentGraphResponse(user_id, exp, course):
+    nodes, edges, node_info = process.GetGraphComponents(user_id, exp, course)
     
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"student_graph", "nodes": nodes, "edges": edges, "node_info": node_info}
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"student_graph", "nodes": nodes, "edges": edges, "node_info": node_info}
 
     return response
 
@@ -63,9 +63,9 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def TaskCompletionResponse(user_A, user_id, exp):
-    task_dists = analytics.TaskIdentification(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"task_identification", "tasks": task_dists}
+def TaskCompletionResponse(user_A, user_id, exp, course):
+    task_dists = analytics.TaskIdentification(user_A, exp, course)
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_identification", "tasks": task_dists}
 
     return response
 
@@ -77,10 +77,10 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def IndicatorResponse(user_A, user_id, exp):
-    exploration = analytics.Exploration(user_A, exp)
-    enjoyment = analytics.Enjoyment(user_id, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"indicators", "indicators": {"exploration": exploration, "enjoyment": enjoyment}}
+def IndicatorResponse(user_A, user_id, exp, course):
+    exploration = analytics.Exploration(user_A, exp, course)
+    enjoyment = analytics.Enjoyment(user_id, exp, course)
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"indicators", "indicators": {"exploration": exploration, "enjoyment": enjoyment}}
 
     return response
 
@@ -92,9 +92,9 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def CentroidResponse(user_A, user_id, exp):
-    centroids = analytics.Centroid(user_A, exp)
-    response = {"user": user_id, "type":"response", "exp": exp, "content":"centroids", "centroids": centroids}
+def CentroidResponse(user_A, user_id, exp, course):
+    centroids = analytics.Centroid(user_A, exp, course)
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"centroids", "centroids": centroids}
 
     return response
 
