@@ -29,7 +29,7 @@ import pandas as pd
 
 def on_message(ws, message):
     try:
-
+        print(message)
         mes = json.loads(message)
         
         ## if the message is a logging message from the UI then process this new log
@@ -87,9 +87,11 @@ def on_error(ws, error):
     print(error)
 
 def on_close(ws, close_status_code, close_msg):
+    print(close_msg)
     print("### closed ###")
 
 def on_open(ws):
+    print('opened')
     def run(*args):
         for i in range(3):
             time.sleep(1)
@@ -98,13 +100,12 @@ def on_open(ws):
         ws.close()
         print("thread terminating...")
     _thread.start_new_thread(run, ())
+    
 
 if __name__ == "__main__":
     
-    #url = os.environ.get("SESSION_URL","ws://127.0.0.1:8888/")
+    #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
     url = "ws://127.0.0.1:8000"
-
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
-
+    ws = websocket.WebSocketApp(url, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()

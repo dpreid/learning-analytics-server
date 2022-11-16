@@ -178,7 +178,7 @@ Once the matrix is updated it will delete the log file
 """
 def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
     command_array, last_line = GetCommandList(user, exp, course)
-    print(command_array)
+   
     if(exp == "spinner"):
         nodes = ['voltage_step', 'voltage_ramp', 'position_step', 'position_ramp', 'speed_step', 'speed_ramp']
     elif(exp == "pendulum"):
