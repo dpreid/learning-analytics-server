@@ -93,9 +93,9 @@ def GenerateGraph(user, exp, course):
 
 
 ## Not used anymore
-def SaveGraphHTML(user, exp):
+def SaveGraphHTML(user, exp, course):
     
-    G = GenerateGraph(user, exp)
+    G = GenerateGraph(user, exp, course)
     G = SetGraphProperties(G, 'spinner')
     #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)

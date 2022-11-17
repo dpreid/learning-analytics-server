@@ -9,28 +9,28 @@ import os
 class TestResponse(unittest.TestCase):
 
     def setUp(self):
-        self.A = process.GenerateAdjacencyMatrix('analytics', 'spinner', False)
+        self.A = process.GenerateAdjacencyMatrix('analytics', 'spinner', 'cie3', False)
 
     def tearDown(self):
         try:
-            os.remove('./test/data/analytics-spinner-adjacency.csv')
+            os.remove('./test/data/analytics-spinner-cie3-adjacency.csv')
         except:
             pass
 
     def test_taskidentification(self):
-        td = analytics.TaskIdentification(self.A, 'spinner')
+        td = analytics.TaskIdentification(self.A, 'spinner', 'cie3')
         with self.subTest():
-            self.assertIn('spinner-3', td)
+            self.assertIn('spinner-cie3-3', td)
         with self.subTest():
-            self.assertIn('spinner-4', td)
+            self.assertIn('spinner-cie3-4', td)
         with self.subTest():
-            self.assertIn('spinner-1-2', td)
+            self.assertIn('spinner-cie3-1-2', td)
         with self.subTest():
-            self.assertIn('spinner-1-2-3', td)
+            self.assertIn('spinner-cie3-1-2-3', td)
         with self.subTest():
-            self.assertIn('spinner-1-2-4', td)
+            self.assertIn('spinner-cie3-1-2-4', td)
         with self.subTest():
-            self.assertIn('spinner-all', td)
+            self.assertIn('spinner-cie3-all', td)
 
 
     
