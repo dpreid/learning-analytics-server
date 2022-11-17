@@ -85,12 +85,14 @@ def Enjoyment(user_id, exp, course):
         positive += feedback.loc['Interested'].sum()
         positive += feedback.loc['Excited'].sum()
         positive += feedback.loc['Satisfied'].sum()
+        positive += feedback.loc['Delighted'].sum()
         ## get sum of negative responses
         negative += feedback.loc['Dissatisfied'].sum()
         negative += feedback.loc['Bored'].sum()
         negative += feedback.loc['Confused'].sum()
         negative += feedback.loc['Uninterested'].sum()
         negative += feedback.loc['Frustrated'].sum()
+        negative += feedback.loc['Surprised'].sum()
 
     return positive-negative
     

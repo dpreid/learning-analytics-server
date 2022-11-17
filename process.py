@@ -57,7 +57,7 @@ def AddUserFeedback(message):
         if(os.path.isfile('%s/%s' % (data_dir, filename))):
             df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         else:
-            states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated']
+            states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Delighted', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated', 'Surprised']
             subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'UI', 'LA']
             if(course == 'cie3'):
                 subjects.push('spinner-cie3-1-2')
