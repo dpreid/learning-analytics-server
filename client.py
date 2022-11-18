@@ -107,5 +107,5 @@ if __name__ == "__main__":
     #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
     url = "ws://127.0.0.1:8000"
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp(url, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
+    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()
