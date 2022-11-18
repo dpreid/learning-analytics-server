@@ -57,8 +57,8 @@ def AddUserFeedback(message):
         if(os.path.isfile('%s/%s' % (data_dir, filename))):
             df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         else:
-            states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated']
-            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'UI', 'LA', 'Other']
+            states = ['Engaged', 'Curious', 'Delighted', 'Bored', 'Confused', 'Frustrated', 'Surprised', 'Anxious']
+            subjects = ['Workbook', 'Remote work', 'Hardware', 'UI', 'LA']
             if(course == 'cie3'):
                 subjects.push('spinner-cie3-1-2')
                 subjects.push('spinner-cie3-3')
@@ -93,9 +93,9 @@ def GenerateGraph(user, exp, course):
 
 
 ## Not used anymore
-def SaveGraphHTML(user, exp):
+def SaveGraphHTML(user, exp, course):
     
-    G = GenerateGraph(user, exp)
+    G = GenerateGraph(user, exp, course)
     G = SetGraphProperties(G, 'spinner')
     #print(G.edges(data=True))
     g=Network(height=800,width=800,notebook=False, directed=True)

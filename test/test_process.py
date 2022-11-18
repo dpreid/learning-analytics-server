@@ -8,29 +8,29 @@ import os
 class TestProcess(unittest.TestCase):
 
     def setUp(self):
-        process.GenerateAdjacencyMatrix('1234', 'spinner', False)
+        process.GenerateAdjacencyMatrix('1234', 'spinner', 'tcourse', False)
 
     def tearDown(self):
         try:
-            os.remove('./test/data/1234-spinner-adjacency.csv')
+            os.remove('./test/data/1234-spinner-tcourse-adjacency.csv')
         except:
             pass
 
 
     def test_add_user_log(self):
-        process.AddUserLog({"user": "4321", "exp": "spinner"})
+        process.AddUserLog({"user": "4321", "exp": "spinner", "course":"tcourse"})
         try:
-            line = open('./test/data/4321-spinner.json').readline()
+            line = open('./test/data/4321-spinner-tcourse.json').readline()
         finally:
-            os.remove('./test/data/4321-spinner.json')
+            os.remove('./test/data/4321-spinner-tcourse.json')
 
-        self.assertEqual(line, '{"user": "4321", "exp": "spinner"}\n')
+        self.assertEqual(line, '{"user": "4321", "exp": "spinner", "course": "tcourse"}\n')
 
 
 
 
     def test_command_list(self):
-        array, last_line = process.GetCommandList('1234', 'spinner')
+        array, last_line = process.GetCommandList('1234', 'spinner', 'tcourse')
         with self.subTest():
             self.assertEqual(len(array), 10)
         with self.subTest():
@@ -40,7 +40,7 @@ class TestProcess(unittest.TestCase):
     def test_generate_matrix(self):
         
         try:
-            df = pd.read_csv('./test/data/1234-spinner-adjacency.csv', index_col=0)
+            df = pd.read_csv('./test/data/1234-spinner-tcourse-adjacency.csv', index_col=0)
         except:
             print("csv doesn't exist")
             
@@ -56,10 +56,10 @@ class TestProcess(unittest.TestCase):
 
     def test_generate_matrix_with_existing_matrix(self):
         # generate matrix a second time
-        process.GenerateAdjacencyMatrix('1234', 'spinner', False)
+        process.GenerateAdjacencyMatrix('1234', 'spinner', 'tcourse', False)
 
         try:
-            df = pd.read_csv('./test/data/1234-spinner-adjacency.csv', index_col=0)
+            df = pd.read_csv('./test/data/1234-spinner-tcourse-adjacency.csv', index_col=0)
         except:
             print("csv doesn't exist")
 
@@ -72,7 +72,7 @@ class TestProcess(unittest.TestCase):
 
     
     def test_draw_graph_html(self):
-        process.SaveGraphHTML('1234', 'spinner')
+        process.SaveGraphHTML('1234', 'spinner', 'tcourse')
 
     # def test_draw_graph_image(self):
     #     process.DrawGraphImage('1234', 'spinner')

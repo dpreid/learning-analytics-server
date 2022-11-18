@@ -9,11 +9,11 @@ import os
 class TestAnalytics(unittest.TestCase):
 
     def setUp(self):
-        self.A = process.GenerateAdjacencyMatrix('analytics', 'spinner', False)
+        self.A = process.GenerateAdjacencyMatrix('analytics', 'spinner', 'tcourse', False)
 
     def tearDown(self):
         try:
-            os.remove('./test/data/analytics-spinner-adjacency.csv')
+            os.remove('./test/data/analytics-spinner-tcourse-adjacency.csv')
         except:
             pass
 
