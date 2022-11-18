@@ -58,7 +58,7 @@ def AddUserFeedback(message):
             df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
         else:
             states = ['Engaged', 'Curious', 'Interested', 'Excited', 'Satisfied', 'Dissatisfied', 'Bored', 'Confused', 'Uninterested', 'Frustrated']
-            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'UI', 'LA']
+            subjects = ['Teaching', 'Workbook', 'Remote work', 'Hardware', 'UI', 'LA', 'Other']
             if(course == 'cie3'):
                 subjects.push('spinner-cie3-1-2')
                 subjects.push('spinner-cie3-3')
