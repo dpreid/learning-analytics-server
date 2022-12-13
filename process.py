@@ -20,7 +20,7 @@ import math
 import matplotlib.pyplot as plt
 from pyvis.network import Network
 
-data_dir = "./test/data"
+data_dir = "./data"
 
 """
 Takes a new log message and adds it to the appropriate user log file
