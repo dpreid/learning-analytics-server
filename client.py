@@ -105,7 +105,8 @@ def on_open(ws):
 if __name__ == "__main__":
     
     #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
-    url = "ws://127.0.0.1:8000"
+    #url = "ws://127.0.0.1:8000"
+    url = "wss://c340-2a00-23c8-a417-4a01-5285-b8ce-788d-9dec.ngrok.io"
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()

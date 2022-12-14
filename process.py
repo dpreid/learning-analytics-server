@@ -20,7 +20,7 @@ import math
 import matplotlib.pyplot as plt
 from pyvis.network import Network
 
-data_dir = "./data"
+data_dir = "/home/david/temp/docker"
 
 """
 Takes a new log message and adds it to the appropriate user log file
