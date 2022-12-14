@@ -12,9 +12,7 @@ Compares student to comparison graphs, using TaskDistance models.
 import pandas as pd
 import process
 import analytics
-import os
 
-data_dir = os.environ.get('DATA_DIR')
 """
 Generates the JSON analytics response to send back to a user
 
@@ -22,7 +20,7 @@ user (Dataframe): user adjacency matrix as a pandas Dataframe
 
 """
 def TestResponse(user_A, user_id, exp):
-    taskdistance_all = analytics.DistanceBetweenGraphs(user_A, pd.read_csv('%s/comparison_graphs/%s-all.csv' % (data_dir, exp), index_col=0), 10, 1)
+    taskdistance_all = analytics.DistanceBetweenGraphs(user_A, pd.read_csv('./comparison_graphs/%s-all.csv' % exp, index_col=0), 10, 1)
     nodes, edges = process.GetGraphComponents(user_id, exp)
     response = {"user": user_id, "type":"response", "exp": exp, "nodes": nodes, "edges": edges, "taskdistance": taskdistance_all}
 

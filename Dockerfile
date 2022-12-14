@@ -4,6 +4,7 @@ ADD process.py /
 ADD response.py /
 ADD TaskDistance.py /
 ADD client.py /
+COPY comparison_graphs/ comparison_graphs/
 ENV DATA_DIR /home/david/temp/docker
 COPY ./requirements.txt /var/www/requirements.txt
 RUN apt-get update && \
