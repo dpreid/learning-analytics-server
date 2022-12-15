@@ -20,8 +20,8 @@ import math
 import matplotlib.pyplot as plt
 from pyvis.network import Network
 
-data_dir = os.environ.get('DATA_DIR')
-
+#data_dir = os.environ.get('DATA_DIR')   # docker implementation
+data_dir = "./test/data"                #local testing
 """
 Takes a new log message and adds it to the appropriate user log file
 message is already in json format and been loaded into json previously
@@ -47,12 +47,14 @@ message is already in json format and been loaded into json previously
 """
 def AddUserFeedback(message):
     try:
+        
         user = message["user"]
         exp = message["exp"]
         course = message['course']
         filename = '%s-%s-%s-feedback.csv' % (user, exp, course)
         new_state = message['payload']['state']
         new_subject = message['payload']['subject']
+        
         # if an adjacency matrix for a user already exists, then add new data to that
         if(os.path.isfile('%s/%s' % (data_dir, filename))):
             df = pd.read_csv('%s/%s' % (data_dir, filename), index_col=0)
@@ -60,12 +62,13 @@ def AddUserFeedback(message):
             states = ['Engaged', 'Curious', 'Delighted', 'Bored', 'Confused', 'Frustrated', 'Surprised', 'Anxious']
             subjects = ['Workbook', 'Remote work', 'Hardware', 'UI', 'LA', 'Other']
             if(course == 'cie3'):
-                subjects.push('spinner-cie3-1-2')
-                subjects.push('spinner-cie3-3')
-                subjects.push('spinner-cie3-4')
+                subjects.append('spinner-cie3-1-2')
+                subjects.append('spinner-cie3-3')
+                subjects.append('spinner-cie3-4')
             elif(course == 'engdes1'):
-                subjects.push('pendulum-engdes1-1')
-                subjects.push('pendulum-engdes1-2')
+                subjects.append('pendulum-engdes1-1')
+                subjects.append('pendulum-engdes1-2')
+            
             matrix = np.zeros(shape=(len(states), len(subjects)))
             df = pd.DataFrame(matrix, states, subjects)
             

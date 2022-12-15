@@ -1,0 +1,11 @@
+services:
+  analytics:
+    image: analytics/latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - user-storage:/home/david/temp/docker
+
+volumes:
+  user-storage:
