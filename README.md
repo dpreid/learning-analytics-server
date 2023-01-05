@@ -26,3 +26,12 @@ The payload differs, but is along the lines of:
 ```
 
 Where log will be equal to the state set: voltage, voltage_ramp, position, position_ramp.....
+
+
+## Running on Amazon AWS EC2 instance
+
+Install docker and docker-compose. Will probably have to run all commands with sudo. 
+
+To get running I set HTTP, HTTPS, SSH (for logging in to EC2 instance locally) and All TCP were set in the inbound security settings. Will need to check the security of all this and exactly what is necessary. Connection through the websocket was not allowed until I set All TCP.
+
+Ensure that the ENV variable for the data directory to mount for storage is appropriately set in Dockerfile

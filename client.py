@@ -26,6 +26,7 @@ import analytics
 import process
 import response
 import pandas as pd
+from time import sleep
 
 def on_message(ws, message):
     try:
@@ -83,12 +84,28 @@ def on_message(ws, message):
         print(e)
         traceback.print_stack()
 
+def connect():
+    url = "wss://77a0-2a00-23c8-a417-4a01-9ac7-c293-d47-bdc4.ngrok.io"
+    websocket.enableTrace(False)
+    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
+    ws.run_forever()
+
 def on_error(ws, error):
     print(error)
 
 def on_close(ws, close_status_code, close_msg):
     print(close_msg)
-    print("### closed ###")
+    connected = False   
+    print( "connection lost... reconnecting" )  
+    while not connected:  
+        # attempt to reconnect, otherwise sleep for 2 seconds  
+        try:  
+            connect() 
+            connected = True  
+            print( "re-connection successful" )  
+        except:  
+            print( "re-connection NOT successful, retrying in 2 seconds..." )
+            sleep( 2 )
 
 def on_open(ws):
     print('opened')
@@ -105,8 +122,5 @@ def on_open(ws):
 if __name__ == "__main__":
     
     #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
-    url = "ws://127.0.0.1:8000"
-    #url = "wss://30b2-2a00-23c8-a417-4a01-a00f-a110-8ccc-6e94.ngrok.io"
-    websocket.enableTrace(False)
-    ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
-    ws.run_forever()
+    #url = "ws://127.0.0.1:8000"
+    connect()

@@ -9,3 +9,5 @@ services:
 
 volumes:
   user-storage:
+    driver: local
+    name: user-storage

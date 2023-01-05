@@ -20,8 +20,8 @@ import math
 import matplotlib.pyplot as plt
 from pyvis.network import Network
 
-#data_dir = os.environ.get('DATA_DIR')   # docker implementation
-data_dir = "./test/data"                #local testing
+data_dir = os.environ.get('DATA_DIR')   # docker implementation
+#data_dir = "./test/data"                #local testing
 """
 Takes a new log message and adds it to the appropriate user log file
 message is already in json format and been loaded into json previously
