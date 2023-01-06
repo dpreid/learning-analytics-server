@@ -51,39 +51,50 @@ class TestAnalytics(unittest.TestCase):
 
     def test_feedback_0_content(self):
         feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2')
-        self.assertIn('You may want to run hardware mode voltage_step more times', feedback)
-
-    def test_feedback_0_length(self):
-        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2')
-        self.assertEqual(len(feedback), 1)
+        with self.subTest():
+            self.assertEqual(['voltage_step'], feedback['hardware_freq'])
+        with self.subTest():
+            self.assertEqual([], feedback['hardware'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition_freq'])
 
     def test_feedback_1_content(self):
         feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2-3')
-        self.assertIn('You may want to run hardware mode voltage_step more times', feedback)
-
-    def test_feedback_1_length(self):
-        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2-3')
-        self.assertEqual(len(feedback), 1)
+        with self.subTest():
+            self.assertEqual(['voltage_step'], feedback['hardware_freq'])
+        with self.subTest():
+            self.assertEqual([], feedback['hardware'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition_freq'])
 
     def test_feedback_2_content(self):
         feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-all')
-        self.assertEqual(['You may want to run hardware mode voltage_step more times', 'You may want to run hardware mode position_step more times'], feedback)
+        with self.subTest():
+            self.assertEqual(['voltage_step', 'position_step'], feedback['hardware_freq'])
+        with self.subTest():
+            self.assertEqual([], feedback['hardware'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition_freq'])
 
-    def test_feedback_2_length(self):
-        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-all')
-        self.assertEqual(len(feedback), 2)
 
     def test_feedback_3_content(self):
         A = pd.read_csv('./test/data/spinner-compare-4.csv', index_col=0)
         feedback = analytics.TaskFeedback(A, 'spinner-cie3-3')
-        self.assertEqual(['You may want to run hardware mode position_step', 
-                            'You may need to transition between position_step and position_ramp',
-                            'You may want to run hardware mode position_ramp'], feedback)
+        with self.subTest():
+            self.assertEqual(['position_step', 'position_ramp'], feedback['hardware'])
+        with self.subTest():
+            self.assertEqual(['position_step to position_ramp'], feedback['transition'])
+        with self.subTest():
+            self.assertEqual([], feedback['hardware_freq'])
+        with self.subTest():
+            self.assertEqual([], feedback['transition_freq'])
 
-    def test_feedback_3_length(self):
-        A = pd.read_csv('./test/data/spinner-compare-4.csv', index_col=0)
-        feedback = analytics.TaskFeedback(A, 'spinner-cie3-3')
-        self.assertEqual(len(feedback), 3)
         
 
 

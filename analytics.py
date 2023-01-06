@@ -58,7 +58,7 @@ compare_task (string): name of the comparison task
 
 """
 def TaskFeedback(user_A, compare_task):
-    task_feedback = []
+    task_feedback = {'hardware': [], 'hardware_freq': [], 'transition': [], 'transition_freq': []}
     B = pd.read_csv('./comparison_graphs/%s.csv' % compare_task, index_col=0)
     rows = user_A.shape[0]
     cols = user_A.shape[1]
@@ -66,15 +66,15 @@ def TaskFeedback(user_A, compare_task):
             for j in range(0, cols):
                 if(checkMissingEdge(user_A.iloc[i,j], B.iloc[i,j])):
                     if(i == j):
-                        task_feedback.append('You may want to run hardware mode ' + user_A.columns.values[j])
+                        task_feedback['hardware'].append(user_A.columns.values[j])
                     else:
-                        task_feedback.append('You may need to transition between ' + user_A.index.values[i] + ' and ' + user_A.columns.values[j])
+                        task_feedback['transition'].append(user_A.index.values[i] + ' to ' + user_A.columns.values[j])
 
                 elif(user_A.iloc[i,j] - B.iloc[i,j] < 0):
                     if(i == j):
-                        task_feedback.append('You may want to run hardware mode ' + user_A.columns.values[j] + ' more times')
+                        task_feedback['hardware_freq'].append(user_A.columns.values[j])
                     else:
-                        task_feedback.append('You may need to transition more between ' + user_A.index.values[i] + ' and ' + user_A.columns.values[j])
+                        task_feedback['transition_freq'].append(user_A.index.values[i] + ' to ' + user_A.columns.values[j])
 
     return task_feedback
 
