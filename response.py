@@ -81,7 +81,7 @@ course (string): the course that a student is enrolled in
 """
 def TaskFeedbackResponse(user_A, user_id, compare_task, exp, course):
     task_feedback = analytics.TaskFeedback(user_A, compare_task)
-    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_feedback", "comments": task_feedback}
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_feedback", "feedback": task_feedback}
 
     return response
 
