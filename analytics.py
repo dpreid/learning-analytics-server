@@ -119,7 +119,25 @@ def Enjoyment(user_id, exp, course):
 
     return positive-negative
     
-    
+"""
+Returns the percentage of edges in the student graph in comparison to the expected full procedure
+
+user_A (Dataframe): user adjacency matrix as a pandas Dataframe
+exp (string): name of the experiment
+course (string): the course the student is enrolled on
+"""
+def TotalEdges(user_A, exp, course):
+    if(exp == 'spinner' and course == 'cie3'):
+        expected_graph = pd.read_csv('./comparison_graphs/spinner-cie3-all.csv', index_col=0)
+    # elif(exp == 'spinner' and course == 'engdes1'):
+    #     expected = pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0)
+    elif(exp == 'pendulum' and course == 'engdes1'):
+        expected_graph = pd.read_csv('./comparison_graphs/pendulum-engdes1-all.csv', index_col=0)
+
+    expected_total = expected_graph.to_numpy().sum()
+    student_total = user_A.to_numpy().sum()
+
+    return student_total * 100.0 / expected_total
     
 
 

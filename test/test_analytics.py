@@ -96,7 +96,14 @@ class TestAnalytics(unittest.TestCase):
             self.assertEqual([], feedback['transition_freq'])
 
         
+    def test_total_edges_0(self):
+        total = analytics.TotalEdges(self.A, 'spinner', 'cie3')
+        self.assertEqual(total, 900/439)
 
+    def test_total_edges_1(self):
+        compare = pd.read_csv('./comparison_graphs/spinner-cie3-1-2.csv', index_col=0)
+        total = analytics.TotalEdges(compare, 'spinner', 'cie3')
+        self.assertEqual(total, 40300/439)
 
     
 
