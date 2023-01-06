@@ -10,7 +10,7 @@ Compares student to comparison graphs, using TaskDistance models.
 @author: dprydereid@gmail.com
 """
 import pandas as pd
-from TaskDistance import TaskDistance
+from TaskDistance import TaskDistance, checkMissingEdge
 import process
 import os
 from pathlib import Path
@@ -50,6 +50,33 @@ def TaskIdentification(user, exp, course, a = 10, b = 1, p = 2, u = 2, l = -1):
     
     return td
 
+"""
+Returns comments that compare a student graph to a given task comparison graph.
+
+user_A (Dataframe): user adjacency matrix as a pandas Dataframe
+compare_task (string): name of the comparison task
+
+"""
+def TaskFeedback(user_A, compare_task):
+    task_feedback = []
+    B = pd.read_csv('./comparison_graphs/%s.csv' % compare_task, index_col=0)
+    rows = user_A.shape[0]
+    cols = user_A.shape[1]
+    for i in range(0, rows):
+            for j in range(0, cols):
+                if(checkMissingEdge(user_A.iloc[i,j], B.iloc[i,j])):
+                    if(i == j):
+                        task_feedback.append('You may want to run hardware mode ' + user_A.columns.values[j])
+                    else:
+                        task_feedback.append('You may need to transition between ' + user_A.index.values[i] + ' and ' + user_A.columns.values[j])
+
+                elif(user_A.iloc[i,j] - B.iloc[i,j] < 0):
+                    if(i == j):
+                        task_feedback.append('You may want to run hardware mode ' + user_A.columns.values[j] + ' more times')
+                    else:
+                        task_feedback.append('You may need to transition more between ' + user_A.index.values[i] + ' and ' + user_A.columns.values[j])
+
+    return task_feedback
 
 """
 Returns a value for student exploration of hardware space, based on the exploration model of TaskDistance

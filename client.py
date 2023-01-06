@@ -47,7 +47,7 @@ def on_message(ws, message):
             exp = mes['exp']
             course = mes['course']
             payload = mes['payload']
-            ##update this to reflect use of a single method to generate analytics
+            
             A = process.GenerateAdjacencyMatrix(user, exp, course)
 
             ## if requesting a graph do something
@@ -69,6 +69,10 @@ def on_message(ws, message):
 
             elif(payload['content'] == 'centroids'):
                 res = response.CentroidResponse(A, user, exp, course)
+                ws.send(json.dumps(res))
+
+            elif(payload['content'] == 'task_feedback'):
+                res = response.TaskFeedbackResponse(A, user, payload['task'], exp, course)
                 ws.send(json.dumps(res))
             
             

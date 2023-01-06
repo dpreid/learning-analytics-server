@@ -49,6 +49,42 @@ class TestAnalytics(unittest.TestCase):
         distance = analytics.DistanceBetweenGraphs(self.A, compare, 10, 1)
         self.assertEqual(distance, 3)
 
+    def test_feedback_0_content(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2')
+        self.assertIn('You may want to run hardware mode voltage_step more times', feedback)
+
+    def test_feedback_0_length(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2')
+        self.assertEqual(len(feedback), 1)
+
+    def test_feedback_1_content(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2-3')
+        self.assertIn('You may want to run hardware mode voltage_step more times', feedback)
+
+    def test_feedback_1_length(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-1-2-3')
+        self.assertEqual(len(feedback), 1)
+
+    def test_feedback_2_content(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-all')
+        self.assertEqual(['You may want to run hardware mode voltage_step more times', 'You may want to run hardware mode position_step more times'], feedback)
+
+    def test_feedback_2_length(self):
+        feedback = analytics.TaskFeedback(self.A, 'spinner-cie3-all')
+        self.assertEqual(len(feedback), 2)
+
+    def test_feedback_3_content(self):
+        A = pd.read_csv('./test/data/spinner-compare-4.csv', index_col=0)
+        feedback = analytics.TaskFeedback(A, 'spinner-cie3-3')
+        self.assertEqual(['You may want to run hardware mode position_step', 
+                            'You may need to transition between position_step and position_ramp',
+                            'You may want to run hardware mode position_ramp'], feedback)
+
+    def test_feedback_3_length(self):
+        A = pd.read_csv('./test/data/spinner-compare-4.csv', index_col=0)
+        feedback = analytics.TaskFeedback(A, 'spinner-cie3-3')
+        self.assertEqual(len(feedback), 3)
+        
 
 
     

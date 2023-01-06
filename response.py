@@ -68,6 +68,23 @@ def TaskCompletionResponse(user_A, user_id, exp, course):
 
     return response
 
+
+"""
+Generates the JSON response to send back to a user for a task compare request
+
+user_A (Dataframe): user adjacency matrix as a pandas Dataframe
+user_id (string): user UUID
+compare_task (string): the comparison model to compare to
+exp (string): the remote lab hardware
+course (string): the course that a student is enrolled in
+
+"""
+def TaskFeedbackResponse(user_A, user_id, compare_task, exp, course):
+    task_feedback = analytics.TaskFeedback(user_A, compare_task)
+    response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_compare", "comments": task_feedback}
+
+    return response
+
 """
 Generates the JSON response to send back to a user for an exploration request
 
