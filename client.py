@@ -30,9 +30,9 @@ from time import sleep
 
 def on_message(ws, message):
     try:
-        print(message)
-        mes = json.loads(message)
         
+        mes = json.loads(message)
+        print(mes["type"])
         ## if the message is a logging message from the UI then process this new log
         ## No response sent from client
         if(mes["type"] == "log"):
@@ -77,6 +77,8 @@ def on_message(ws, message):
             print('logging feedback')
             process.AddUserFeedback(mes)
 
+        elif(mes["type"] == "response"):
+            print("Analytics sending response")
         else:
             print("log message not recognised")    
         
@@ -85,7 +87,8 @@ def on_message(ws, message):
         traceback.print_stack()
 
 def connect():
-    url = "wss://77a0-2a00-23c8-a417-4a01-9ac7-c293-d47-bdc4.ngrok.io"
+    url = "ws://127.0.0.1:8000"
+    #url = "wss://77a0-2a00-23c8-a417-4a01-9ac7-c293-d47-bdc4.ngrok.io"
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()
@@ -94,18 +97,15 @@ def on_error(ws, error):
     print(error)
 
 def on_close(ws, close_status_code, close_msg):
-    print(close_msg)
-    connected = False   
+    print(close_msg) 
     print( "connection lost... reconnecting" )  
-    while not connected:  
-        # attempt to reconnect, otherwise sleep for 2 seconds  
-        try:  
-            connect() 
-            connected = True  
-            print( "re-connection successful" )  
-        except:  
-            print( "re-connection NOT successful, retrying in 2 seconds..." )
-            sleep( 2 )
+    sleep( 2 )
+    try:  
+        connect()  
+        print( "re-connection successful" )  
+    except:  
+        print( "re-connection NOT successful, retrying in 2 seconds..." )
+        
 
 def on_open(ws):
     print('opened')
@@ -122,5 +122,5 @@ def on_open(ws):
 if __name__ == "__main__":
     
     #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
-    #url = "ws://127.0.0.1:8000"
+    
     connect()
