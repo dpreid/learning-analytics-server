@@ -39,6 +39,10 @@ def on_message(ws, message):
 
             process.AddUserLog(mes)
 
+            ## if a student does not access the analytics dashboard then log files will grow without limit.
+            ## Automatically convert log files to an adjacency matrix when log file reaches a specific number of lines
+            process.AutoConvertLogs(mes, 100)
+
 
         ## else if the message is a request to return the analytics for a specific user then do..
         ## user adjacency matrix as a dataframe is generated here and passed to analysis methods

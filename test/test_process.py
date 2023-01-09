@@ -77,6 +77,42 @@ class TestProcess(unittest.TestCase):
     # def test_draw_graph_image(self):
     #     process.DrawGraphImage('1234', 'spinner')
 
+    # test an empty log file
+    def test_autogenerate_adjacency_0(self):
+        mes = {"user": "test0", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
+        # process.AddUserLog(mes)
+        process.AutoConvertLogs(mes, 20)
+        file_exists = os.path.isfile('./test/data/test0-spinner-cie3.csv')
+        
+        #os.remove('./test/data/test0-spinner-cie3.csv')
+        
+        # file should not be created as too few logs
+        self.assertFalse(file_exists)
+
+    # test a log file with fewer than necessary logs
+    def test_autogenerate_adjacency_1(self):
+        mes = {"user": "test1", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
+        # process.AddUserLog(mes)
+        process.AutoConvertLogs(mes, 20)
+        file_exists = os.path.isfile('./test/data/test1-spinner-cie3.csv')
+        
+        #os.remove('./test/data/test0-spinner-cie3.csv')
+        
+        # file should not be created as too few logs
+        self.assertFalse(file_exists)
+
+    # test a log file with greater than necessary logs
+    def test_autogenerate_adjacency_2(self):
+        mes = {"user": "test2", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
+        # process.AddUserLog(mes)
+        process.AutoConvertLogs(mes, 20, False)
+        file_exists = os.path.isfile('./test/data/test2-spinner-cie3-adjacency.csv')
+        
+        os.remove('./test/data/test2-spinner-cie3-adjacency.csv')
+        
+        # file should be created as sufficient logs to run auto generate
+        self.assertTrue(file_exists)
+
 
 if __name__ == '__main__':
     unittest.main()

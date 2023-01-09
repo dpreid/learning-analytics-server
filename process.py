@@ -310,3 +310,21 @@ def GetUserFeedback(user_id, exp, course):
         exists = False
 
     return df, exists
+
+
+'''
+Checks the number of logs in a student log file, if > n processes the log file into an adjacency matrix
+'''
+def AutoConvertLogs(mes, n, deleteLogFile = True):
+    user = mes['user']
+    exp = mes['exp']
+    course = mes['course']
+
+    filename = '%s-%s-%s.json' % (user, exp, course)
+    num_logs = 0
+
+    with open('%s/%s' % (data_dir, filename), 'r') as log_file:
+        num_logs = len(log_file.readlines())
+    
+    if(num_logs > n):
+        GenerateAdjacencyMatrix(user, exp, course, deleteLogFile)
