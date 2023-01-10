@@ -35,7 +35,7 @@ def on_message(ws, message):
         print(mes["type"])
         ## if the message is a logging message from the UI then process this new log
         ## No response sent from client
-        if(mes["type"] == "log"):
+        if(mes["type"] == "analytics"):
 
             process.AddUserLog(mes)
 
