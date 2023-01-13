@@ -95,8 +95,8 @@ def on_message(ws, message):
         traceback.print_stack()
 
 def connect():
-    url = "ws://127.0.0.1:8000"
-    #url = "wss://77a0-2a00-23c8-a417-4a01-9ac7-c293-d47-bdc4.ngrok.io"
+    url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
+    print(url)
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()
@@ -106,13 +106,7 @@ def on_error(ws, error):
 
 def on_close(ws, close_status_code, close_msg):
     print(close_msg) 
-    print( "connection lost... reconnecting" )  
-    sleep( 2 )
-    try:  
-        connect()  
-        print( "re-connection successful" )  
-    except:  
-        print( "re-connection NOT successful, retrying in 2 seconds..." )
+    print( "connection lost...exiting" )  
         
 
 def on_open(ws):
