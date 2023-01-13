@@ -31,8 +31,9 @@ def AddUserLog(message):
     try:
         user = message["user"]
         exp = message["exp"]
+        hardware = message["hardware"]
         course = message['course']
-        filename = '%s-%s-%s.json' % (user, exp, course)
+        filename = '%s-%s-%s-%s.json' % (user, hardware, exp, course)
 
         with open('%s/%s' % (data_dir, filename), 'a') as outfile:
             d = json.dumps(message)
