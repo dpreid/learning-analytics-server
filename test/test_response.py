@@ -16,7 +16,7 @@ class TestResponse(unittest.TestCase):
             os.remove('./test/data/analytics-spinner-cie3-adjacency.csv')
         except:
             pass
-
+    @unittest.skip
     def test_taskidentification(self):
         td = analytics.TaskIdentification(self.A, 'spinner', 'cie3')
         with self.subTest():

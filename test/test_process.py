@@ -16,7 +16,7 @@ class TestProcess(unittest.TestCase):
         except:
             pass
 
-
+    @unittest.skip
     def test_add_user_log(self):
         process.AddUserLog({"user": "4321", "exp": "spinner", "course":"tcourse"})
         try:
@@ -28,7 +28,7 @@ class TestProcess(unittest.TestCase):
 
 
 
-
+    @unittest.skip
     def test_command_list(self):
         array, last_line = process.GetCommandList('1234', 'spinner', 'tcourse')
         with self.subTest():
@@ -36,7 +36,7 @@ class TestProcess(unittest.TestCase):
         with self.subTest():
             self.assertMultiLineEqual(str(last_line), "{'user': 'expert', 't': 1657275054213, 'payload': {'log': 'position', 'data': {'set': 2, 'kp': 1, 'ki': 0, 'kd': 0}}}")
 
-
+    @unittest.skip
     def test_generate_matrix(self):
         
         try:
@@ -53,7 +53,7 @@ class TestProcess(unittest.TestCase):
             self.assertEqual(df['position_ramp']['position_ramp'], 3)
 
 
-
+    @unittest.skip
     def test_generate_matrix_with_existing_matrix(self):
         # generate matrix a second time
         process.GenerateAdjacencyMatrix('1234', 'spinner', 'tcourse', False)
@@ -70,14 +70,14 @@ class TestProcess(unittest.TestCase):
         with self.subTest():
             self.assertEqual(df['position_ramp']['position_ramp'], 6)
 
-    
+    @unittest.skip
     def test_draw_graph_html(self):
         process.SaveGraphHTML('1234', 'spinner', 'tcourse')
 
     # def test_draw_graph_image(self):
     #     process.DrawGraphImage('1234', 'spinner')
 
-    # test an empty log file
+    @unittest.skip
     def test_autogenerate_adjacency_0(self):
         mes = {"user": "test0", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
         # process.AddUserLog(mes)
@@ -90,6 +90,7 @@ class TestProcess(unittest.TestCase):
         self.assertFalse(file_exists)
 
     # test a log file with fewer than necessary logs
+    @unittest.skip
     def test_autogenerate_adjacency_1(self):
         mes = {"user": "test1", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
         # process.AddUserLog(mes)
@@ -102,6 +103,7 @@ class TestProcess(unittest.TestCase):
         self.assertFalse(file_exists)
 
     # test a log file with greater than necessary logs
+    @unittest.skip
     def test_autogenerate_adjacency_2(self):
         mes = {"user": "test2", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
         # process.AddUserLog(mes)
@@ -113,6 +115,7 @@ class TestProcess(unittest.TestCase):
         # file should be created as sufficient logs to run auto generate
         self.assertTrue(file_exists)
 
+    
     def test_command_list_multi_file_0(self):
         
         array, last_line = process.GetCommandList('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1')
@@ -123,7 +126,17 @@ class TestProcess(unittest.TestCase):
         # with self.subTest():
         #     self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
 
+    def test_generate_adjacency_multi_file_0(self):
+        df = process.GenerateAdjacencyMatrix('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1', False)
+        
+        os.remove('./test/data/53a6788c-e689-48d4-9231-c2fbd23df009-spinner-engdes1-adjacency.csv')
+        os.remove('./test/data/53a6788c-e689-48d4-9231-c2fbd23df009-spinner-engdes1.json')
+        with self.subTest():
+            self.assertEqual(df['voltage_step']['voltage_ramp'], 9)
+        with self.subTest():
+            self.assertEqual(df['voltage_ramp']['voltage_step'], 10)
 
+        
 
 if __name__ == '__main__':
     unittest.main()

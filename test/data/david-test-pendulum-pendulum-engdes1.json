@@ -1,7 +1,0 @@
-{"user": "david-test-pendulum", "t": 1673278984887, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "start", "data": {"set": 50}}}
-{"user": "david-test-pendulum", "t": 1673278996832, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "brake"}}
-{"user": "david-test-pendulum", "t": 1673279001125, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "drive_perc", "data": {"set": "79"}}}
-{"user": "david-test-pendulum", "t": 1673279003848, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "brake_perc", "data": {"set": "19"}}}
-{"user": "david-test-pendulum", "t": 1673279006508, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "sampling", "data": {"set": "142"}}}
-{"user": "david-test-pendulum", "t": 1673279011289, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "start", "data": {"set": 50}}}
-{"user": "david-test-pendulum", "t": 1673279021940, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "brake"}}

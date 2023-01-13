@@ -207,13 +207,14 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
     # output the updated csv to file
     df.to_csv('%s/%s' % (data_dir, filename))
 
-    # for storage reasons do not store the complete json log list
+    # for storage reasons remove the log list json files
+    for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)) + glob.glob(data_dir + '/%s-%s-%s.json' % (user, exp, course)):
+        if(deleteLogFile):
+            os.remove(file)
     # need to maintain the latest command however to generate the correct edge for the next mode set
     # can this be changed to open with 'w' instead of removing file and then open 'a'?
-    if(os.path.isfile('%s/%s-%s-%s.json' % (data_dir, user, exp, course)) and deleteLogFile):
-        os.remove('%s/%s-%s-%s.json' % (data_dir, user, exp, course))
-        with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course), 'a') as f:
-            f.write(last_line)
+    with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course), 'w') as f:
+        f.write(json.dumps(last_line))
 
     return df
 
