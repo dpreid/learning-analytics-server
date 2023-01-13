@@ -235,7 +235,7 @@ def GetCommandList(user, exp, course):
     last_line = ''
     num_files = 0
     # go through individual log files associated with a user, course, exp to form a single array of json messages
-    for file in glob.glob(dir + '/%s-*-%s-%s.json' % (user, exp, course)):
+    for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)) + glob.glob(data_dir + '/%s-%s-%s.json' % (user, exp, course)):
         num_files += 1
         with open(file) as f:
             lines = f.readlines()
@@ -243,16 +243,16 @@ def GetCommandList(user, exp, course):
                 pass
             elif len(lines) == 1:
                 try:
-                    log_data = json.loads(lines[0])
-                    log_array.append(log_data)
+                    log = json.loads(lines[0])
+                    log_array.append(log)
                 except:
                     pass
             else:
                 for index, line in enumerate(lines):
                     if len(line)>1:
                         try:
-                            log_data = json.loads(line)
-                            log_array.append(log_data)
+                            log = json.loads(line)
+                            log_array.append(log)
                         except:
                             pass
 
@@ -299,8 +299,8 @@ def GetCommandList(user, exp, course):
 
             except:
                 pass
-    ## the last message is whatever log_data is once it reaches here
-    last_line = log_data
+        ## the last message is whatever log_data is once it reaches here
+        last_line = log_data
     
     return command_array, last_line
 

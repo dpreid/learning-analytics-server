@@ -34,7 +34,7 @@ class TestProcess(unittest.TestCase):
         with self.subTest():
             self.assertEqual(len(array), 10)
         with self.subTest():
-            self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
+            self.assertMultiLineEqual(str(last_line), "{'user': 'expert', 't': 1657275054213, 'payload': {'log': 'position', 'data': {'set': 2, 'kp': 1, 'ki': 0, 'kd': 0}}}")
 
 
     def test_generate_matrix(self):
