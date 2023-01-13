@@ -113,6 +113,17 @@ class TestProcess(unittest.TestCase):
         # file should be created as sufficient logs to run auto generate
         self.assertTrue(file_exists)
 
+    def test_command_list_multi_file_0(self):
+        
+        array, last_line = process.GetCommandList('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1')
+        #with self.subTest():
+        print(array)
+        print(last_line)
+        self.assertEqual(len(array), 20)
+        # with self.subTest():
+        #     self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
+
+
 
 if __name__ == '__main__':
     unittest.main()

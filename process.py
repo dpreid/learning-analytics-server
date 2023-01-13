@@ -11,13 +11,14 @@ Generates student adjacency matrices and graph (SVGs).
 
 @author: dprydereid@gmail.com
 """
-import pandas as pd
-import numpy as np
-import networkx as nx
+import glob
 import json
-import os
 import math
 import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+import os
+import pandas as pd
 from pyvis.network import Network
 
 #data_dir = os.environ.get('DATA_DIR')   # docker implementation
@@ -173,7 +174,7 @@ def DrawGraphImage(user, exp):
 
 
 """
-Converts a user log file into a adjacency matrix
+Converts possible multiple user log files into a adjacency matrix
 
 If the matrix already exists, then it adds the log file to that matrix.
 
@@ -208,6 +209,7 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
 
     # for storage reasons do not store the complete json log list
     # need to maintain the latest command however to generate the correct edge for the next mode set
+    # can this be changed to open with 'w' instead of removing file and then open 'a'?
     if(os.path.isfile('%s/%s-%s-%s.json' % (data_dir, user, exp, course)) and deleteLogFile):
         os.remove('%s/%s-%s-%s.json' % (data_dir, user, exp, course))
         with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course), 'a') as f:
@@ -215,56 +217,90 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
 
     return df
 
+'''
+Function for extracting timestamp info from a json message
+'''
+def getTimestampOfLog(log):
+    return log['t']
+
 """
-Generates a list of student commands from the user log file
-Returns and array of commands sent to hardware
+Generates a list of student commands from the user log files
+Sorts all commands by timestamp
+Returns an array of commands sent to hardware
 Also returns the last line of the command list for storage
 """
 def GetCommandList(user, exp, course):
+    log_array = []
     command_array = []
     last_line = ''
-    if(os.path.isfile('%s/%s-%s-%s.json' % (data_dir, user, exp, course))):
-        with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course)) as f:
+    num_files = 0
+    # go through individual log files associated with a user, course, exp to form a single array of json messages
+    for file in glob.glob(dir + '/%s-*-%s-%s.json' % (user, exp, course)):
+        num_files += 1
+        with open(file) as f:
             lines = f.readlines()
-            for line in lines:
-                if len(line)>1:
-                    try:
-                        log_data = json.loads(line)
-                        #command sent
-                        if(log_data["payload"]["log"] == 'voltage'):
-                            command_array.append('voltage_step')
-                        elif(log_data["payload"]["log"] == 'voltage_ramp'):
-                            command_array.append('voltage_ramp')
-                        elif(log_data["payload"]["log"] == 'position'):
-                            command_array.append('position_step')
-                        elif(log_data["payload"]["log"] == 'position_ramp'):
-                            command_array.append('position_ramp')
-                        elif(log_data["payload"]["log"] == 'speed'):
-                            command_array.append('speed_step')
-                        elif(log_data["payload"]["log"] == 'speed_ramp'):
-                            command_array.append('speed_ramp')
-                        elif(log_data["payload"]["log"] == 'start'):
-                            command_array.append('start')
-                        elif(log_data["payload"]["log"] == 'brake'):
-                            command_array.append('brake')
-                        elif(log_data["payload"]["log"] == 'free'):
-                            command_array.append('free')
-                        elif(log_data["payload"]["log"] == 'load'):
-                            command_array.append('load')
-                        elif(log_data["payload"]["log"] == 'sampling'):
-                            command_array.append('sampling')
-                        elif(log_data["payload"]["log"] == 'drive_perc'):
-                            command_array.append('drive_perc')
-                        elif(log_data["payload"]["log"] == 'brake_perc'):
-                            command_array.append('brake_perc')
-                        elif(log_data["payload"]["log"] == 'measuring_tools'):
-                            command_array.append('measuring_tools')
-                        else:
+            if len(lines) == 0:
+                pass
+            elif len(lines) == 1:
+                try:
+                    log_data = json.loads(lines[0])
+                    log_array.append(log_data)
+                except:
+                    pass
+            else:
+                for index, line in enumerate(lines):
+                    if len(line)>1:
+                        try:
+                            log_data = json.loads(line)
+                            log_array.append(log_data)
+                        except:
                             pass
 
-                    except:
-                        pass
-            last_line = line
+    #sort that array by timestamp if there were multiple files, else the order will already be correct
+    if(num_files > 1):
+        log_array.sort(key=getTimestampOfLog)
+
+    # loop through log_array to read out commands only into command_array
+    
+    for log_data in log_array:
+        if len(log_data)>1:
+            try:
+                
+                if(log_data["payload"]["log"] == 'voltage'):
+                    command_array.append('voltage_step')
+                elif(log_data["payload"]["log"] == 'voltage_ramp'):
+                    command_array.append('voltage_ramp')
+                elif(log_data["payload"]["log"] == 'position'):
+                    command_array.append('position_step')
+                elif(log_data["payload"]["log"] == 'position_ramp'):
+                    command_array.append('position_ramp')
+                elif(log_data["payload"]["log"] == 'speed'):
+                    command_array.append('speed_step')
+                elif(log_data["payload"]["log"] == 'speed_ramp'):
+                    command_array.append('speed_ramp')
+                elif(log_data["payload"]["log"] == 'start'):
+                    command_array.append('start')
+                elif(log_data["payload"]["log"] == 'brake'):
+                    command_array.append('brake')
+                elif(log_data["payload"]["log"] == 'free'):
+                    command_array.append('free')
+                elif(log_data["payload"]["log"] == 'load'):
+                    command_array.append('load')
+                elif(log_data["payload"]["log"] == 'sampling'):
+                    command_array.append('sampling')
+                elif(log_data["payload"]["log"] == 'drive_perc'):
+                    command_array.append('drive_perc')
+                elif(log_data["payload"]["log"] == 'brake_perc'):
+                    command_array.append('brake_perc')
+                elif(log_data["payload"]["log"] == 'measuring_tools'):
+                    command_array.append('measuring_tools')
+                else:
+                    pass
+
+            except:
+                pass
+    ## the last message is whatever log_data is once it reaches here
+    last_line = log_data
     
     return command_array, last_line
 
