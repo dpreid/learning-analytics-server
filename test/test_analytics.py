@@ -9,14 +9,14 @@ import os
 class TestAnalytics(unittest.TestCase):
 
     def setUp(self):
-        self.A = process.GenerateAdjacencyMatrix('analytics', 'spinner', 'tcourse', False)
+        self.A = process.GenerateAdjacencyMatrix('test', 'exp', 'course', False)
 
     def tearDown(self):
         try:
-            os.remove('./test/data/analytics-spinner-tcourse-adjacency.csv')
+            os.remove('./test/data/test-exp-course-adjacency.csv')
         except:
             pass
-    @unittest.skip
+    
     def test_compare_arrays(self):
         ad1 = [[1,0,1,0,0,0],[0,0,0,0,0,0],[0,0,2,1,0,0],[0,0,1,3,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
         ad2 = [[1,1,1,0,0,0],[0,0,0,0,0,0],[1,0,2,1,0,0],[0,0,1,3,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
