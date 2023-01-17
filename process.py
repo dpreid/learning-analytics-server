@@ -22,7 +22,7 @@ import pandas as pd
 from pyvis.network import Network
 
 #data_dir = os.environ.get('DATA_DIR')   # docker implementation
-data_dir = "./test/data"                #local testing
+data_dir = "./test/mock"                #local testing
 """
 Takes a new log message and adds it to the appropriate user log file
 message is already in json format and been loaded into json previously
@@ -217,6 +217,7 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
         hardware = last_line["hardware"]
         with open('%s/%s-%s-%s-%s.json' % (data_dir, user, hardware, exp, course), 'w') as f:
             f.write(json.dumps(last_line))
+            f.write('/n')
 
     return df
 

@@ -95,7 +95,8 @@ def on_message(ws, message):
         traceback.print_stack()
 
 def connect():
-    url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
+    #url = os.environ.get("LOG_URL","ws://127.0.0.1:8888/")
+    url = "ws://127.0.0.1:8000/"
     print(url)
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
