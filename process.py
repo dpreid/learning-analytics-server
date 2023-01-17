@@ -22,7 +22,8 @@ import pandas as pd
 from pyvis.network import Network
 
 #data_dir = os.environ.get('DATA_DIR')   # docker implementation
-data_dir = "./test/mock"                #local testing
+data_dir = "./test/mock"                #testing UI logging
+#data_dir = "./test/data"                #local testing
 """
 Takes a new log message and adds it to the appropriate user log file
 message is already in json format and been loaded into json previously
@@ -209,7 +210,8 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
     df.to_csv('%s/%s' % (data_dir, filename))
 
     # for storage reasons remove the log list json files
-    if(deleteLogFile):
+    # only do this if log files actually exist - ie the command array had at least one entry
+    if(deleteLogFile and len(command_array) > 1):
         for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)):
             os.remove(file)
         # need to maintain the latest command however to generate the correct edge for the next mode set
