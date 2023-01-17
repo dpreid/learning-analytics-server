@@ -78,6 +78,19 @@ def on_message(ws, message):
             elif(payload['content'] == 'task_feedback'):
                 res = response.TaskFeedbackResponse(A, user, payload['task'], exp, course)
                 ws.send(json.dumps(res))
+
+            elif(payload['content'] == 'all_feedback'):
+                res = response.StudentGraphResponse(user, exp, course)
+                ws.send(json.dumps(res))
+                res = response.ComparisonGraphResponse(payload['graph'], user, exp)
+                ws.send(json.dumps(res))
+                res = response.TaskCompletionResponse(A, user, exp, course)
+                ws.send(json.dumps(res))
+                res = response.IndicatorResponse(A, user, exp, course)
+                ws.send(json.dumps(res))
+                res = response.CentroidResponse(A, user, exp, course)
+                ws.send(json.dumps(res))
+
             
             
         ## else if the message is feedback from the user, including tags on the dashboard
