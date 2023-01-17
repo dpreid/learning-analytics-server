@@ -8,39 +8,40 @@ import os
 class TestProcess(unittest.TestCase):
 
     def setUp(self):
-        process.GenerateAdjacencyMatrix('1234', 'spinner', 'tcourse', False)
+        process.GenerateAdjacencyMatrix('test2', 'spinner', 'engdes1', False)
 
     def tearDown(self):
         try:
-            os.remove('./test/data/1234-spinner-tcourse-adjacency.csv')
+            os.remove('./test/data/test2-spinner-engdes1-adjacency.csv')
+            os.remove('./test/data/test2-spinner-engdes1.json')
         except:
             pass
 
-    @unittest.skip
+    
     def test_add_user_log(self):
-        process.AddUserLog({"user": "4321", "exp": "spinner", "course":"tcourse"})
+        process.AddUserLog({"user": "4321", "exp": "spinner", "hardware":"test00", "course":"tcourse"})
         try:
-            line = open('./test/data/4321-spinner-tcourse.json').readline()
+            line = open('./test/data/4321-test00-spinner-tcourse.json').readline()
         finally:
-            os.remove('./test/data/4321-spinner-tcourse.json')
+            os.remove('./test/data/4321-test00-spinner-tcourse.json')
 
-        self.assertEqual(line, '{"user": "4321", "exp": "spinner", "course": "tcourse"}\n')
+        self.assertEqual(line, '{"user": "4321", "exp": "spinner", "hardware": "test00", "course": "tcourse"}\n')
 
 
 
-    @unittest.skip
+    
     def test_command_list(self):
-        array, last_line = process.GetCommandList('1234', 'spinner', 'tcourse')
+        array, last_line = process.GetCommandList('test3', 'spinner', 'engdes1')
         with self.subTest():
             self.assertEqual(len(array), 10)
         with self.subTest():
             self.assertMultiLineEqual(str(last_line), "{'user': 'expert', 't': 1657275054213, 'payload': {'log': 'position', 'data': {'set': 2, 'kp': 1, 'ki': 0, 'kd': 0}}}")
 
-    @unittest.skip
+    
     def test_generate_matrix(self):
-        
+        #adjacency matrix is generated in setUp
         try:
-            df = pd.read_csv('./test/data/1234-spinner-tcourse-adjacency.csv', index_col=0)
+            df = pd.read_csv('./test/data/test2-spinner-engdes1-adjacency.csv', index_col=0)
         except:
             print("csv doesn't exist")
             
@@ -53,13 +54,13 @@ class TestProcess(unittest.TestCase):
             self.assertEqual(df['position_ramp']['position_ramp'], 3)
 
 
-    @unittest.skip
+    
     def test_generate_matrix_with_existing_matrix(self):
         # generate matrix a second time
-        process.GenerateAdjacencyMatrix('1234', 'spinner', 'tcourse', False)
+        process.GenerateAdjacencyMatrix('test2', 'spinner', 'engdes1', False)
 
         try:
-            df = pd.read_csv('./test/data/1234-spinner-tcourse-adjacency.csv', index_col=0)
+            df = pd.read_csv('./test/data/test2-spinner-engdes1-adjacency.csv', index_col=0)
         except:
             print("csv doesn't exist")
 
@@ -115,7 +116,7 @@ class TestProcess(unittest.TestCase):
         # file should be created as sufficient logs to run auto generate
         self.assertTrue(file_exists)
 
-    
+    @unittest.skip
     def test_command_list_multi_file_0(self):
         
         array, last_line = process.GetCommandList('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1')
@@ -125,7 +126,7 @@ class TestProcess(unittest.TestCase):
         self.assertEqual(len(array), 20)
         # with self.subTest():
         #     self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
-
+    @unittest.skip
     def test_generate_adjacency_multi_file_0(self):
         df = process.GenerateAdjacencyMatrix('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1', False)
         

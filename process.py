@@ -209,13 +209,14 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
     df.to_csv('%s/%s' % (data_dir, filename))
 
     # for storage reasons remove the log list json files
-    for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)) + glob.glob(data_dir + '/%s-%s-%s.json' % (user, exp, course)):
-        if(deleteLogFile):
+    if(deleteLogFile):
+        for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)):
             os.remove(file)
-    # need to maintain the latest command however to generate the correct edge for the next mode set
-    # can this be changed to open with 'w' instead of removing file and then open 'a'?
-    with open('%s/%s-%s-%s.json' % (data_dir, user, exp, course), 'w') as f:
-        f.write(json.dumps(last_line))
+        # need to maintain the latest command however to generate the correct edge for the next mode set
+        # can this be changed to open with 'w' instead of removing file and then open 'a'?
+        hardware = last_line["hardware"]
+        with open('%s/%s-%s-%s-%s.json' % (data_dir, user, hardware, exp, course), 'w') as f:
+            f.write(json.dumps(last_line))
 
     return df
 
@@ -237,7 +238,7 @@ def GetCommandList(user, exp, course):
     last_line = ''
     num_files = 0
     # go through individual log files associated with a user, course, exp to form a single array of json messages
-    for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)) + glob.glob(data_dir + '/%s-%s-%s.json' % (user, exp, course)):
+    for file in glob.glob(data_dir + '/%s-*-%s-%s.json' % (user, exp, course)):
         num_files += 1
         with open(file) as f:
             lines = f.readlines()

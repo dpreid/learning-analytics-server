@@ -1,0 +1,10 @@
+{"user": "test", "t": 1673351988406, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "voltage", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988408, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "voltage", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988410, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988412, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988414, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988416, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position_ramp", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988418, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position_ramp", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988420, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position_ramp", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988422, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position_ramp", "data": {"set": 0}}}
+{"user": "test", "t": 1673351988424, "exp": "spinner", "hardware":"test00", "course": "engdes1", "type": "analytics", "payload": {"log": "position", "data": {"set": 0}}}
