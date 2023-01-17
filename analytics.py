@@ -129,8 +129,8 @@ course (string): the course the student is enrolled on
 def TotalEdges(user_A, exp, course):
     if(exp == 'spinner' and course == 'cie3'):
         expected_graph = pd.read_csv('./comparison_graphs/spinner-cie3-all.csv', index_col=0)
-    # elif(exp == 'spinner' and course == 'engdes1'):
-    #     expected = pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0)
+    elif(exp == 'spinner' and course == 'engdes1'):
+        expected_graph = pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0)
     elif(exp == 'pendulum' and course == 'engdes1'):
         expected_graph = pd.read_csv('./comparison_graphs/pendulum-engdes1-all.csv', index_col=0)
 
@@ -208,6 +208,21 @@ def Centroid(user, exp, course):
 
         return {"student": student, "task1": task1, "task3": task3, "task4": task4, "all": all, "vertices": vertex_positions}
     
+    elif(exp == 'spinner' and course == 'engdes1'):
+        vertex_positions = [{'name':'voltage_step', 'x':0.5,'y':math.sin(math.pi/3)}, 
+                            {'name':'voltage_ramp', 'x':-0.5,'y':math.sin(math.pi/3)}, 
+                            {'name':'position_step', 'x':1,'y':0}, 
+                            {'name':'position_ramp', 'x':-1,'y':0}, 
+                            {'name':'speed_step', 'x':0.5,'y':-math.sin(math.pi/3)}, 
+                            {'name':'speed_ramp', 'x':-0.5,'y':-math.sin(math.pi/3)}]
+
+        student = graphCentroid(user, vertex_positions)
+        task1 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-1.csv', index_col=0), vertex_positions)
+        task2 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-2.csv', index_col=0), vertex_positions)
+        all = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0), vertex_positions)
+
+        return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
+    
     elif(exp == 'pendulum' and course == 'engdes1'):
         vertex_positions = [{'name':'brake', 'x':0.5,'y':1}, 
                             {'name':'free', 'x':1,'y':0.5}, 
@@ -221,9 +236,9 @@ def Centroid(user, exp, course):
         student = graphCentroid(user, vertex_positions)
         task1 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-1.csv', index_col=0), vertex_positions)
         task2 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-2.csv', index_col=0), vertex_positions)
-        
+        all = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-all.csv', index_col=0), vertex_positions)
 
-        return {"student": student, "task1": task1, "task2": task2, "vertices": vertex_positions}
+        return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
 
     else:
 
