@@ -217,7 +217,7 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
         hardware = last_line["hardware"]
         with open('%s/%s-%s-%s-%s.json' % (data_dir, user, hardware, exp, course), 'w') as f:
             f.write(json.dumps(last_line))
-            f.write('/n')
+            f.write('\n')
 
     return df
 
