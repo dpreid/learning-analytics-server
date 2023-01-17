@@ -35,7 +35,7 @@ class TestProcess(unittest.TestCase):
         with self.subTest():
             self.assertEqual(len(array), 10)
         with self.subTest():
-            self.assertMultiLineEqual(str(last_line), "{'user': 'expert', 't': 1657275054213, 'payload': {'log': 'position', 'data': {'set': 2, 'kp': 1, 'ki': 0, 'kd': 0}}}")
+            self.assertMultiLineEqual(str(last_line), "{'user': 'test3', 't': 1657275054213, 'payload': {'log': 'position', 'data': {'set': 2, 'kp': 1, 'ki': 0, 'kd': 0}}}")
 
     
     def test_generate_matrix(self):
@@ -71,52 +71,29 @@ class TestProcess(unittest.TestCase):
         with self.subTest():
             self.assertEqual(df['position_ramp']['position_ramp'], 6)
 
-    @unittest.skip
-    def test_draw_graph_html(self):
-        process.SaveGraphHTML('1234', 'spinner', 'tcourse')
 
-    # def test_draw_graph_image(self):
-    #     process.DrawGraphImage('1234', 'spinner')
-
-    @unittest.skip
     def test_autogenerate_adjacency_0(self):
-        mes = {"user": "test0", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
+        mes = {"user": "test", "exp": "spinner", "hardware": "test00", "course":"engdes1", "payload": {"log": "voltage"}}
         # process.AddUserLog(mes)
-        process.AutoConvertLogs(mes, 20)
-        file_exists = os.path.isfile('./test/data/test0-spinner-cie3.csv')
-        
-        #os.remove('./test/data/test0-spinner-cie3.csv')
-        
-        # file should not be created as too few logs
-        self.assertFalse(file_exists)
-
-    # test a log file with fewer than necessary logs
-    @unittest.skip
-    def test_autogenerate_adjacency_1(self):
-        mes = {"user": "test1", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
-        # process.AddUserLog(mes)
-        process.AutoConvertLogs(mes, 20)
-        file_exists = os.path.isfile('./test/data/test1-spinner-cie3.csv')
-        
-        #os.remove('./test/data/test0-spinner-cie3.csv')
+        process.AutoConvertLogs(mes, 20, False)
+        file_exists = os.path.isfile('./test/data/test-spinner-engdes1.csv')
         
         # file should not be created as too few logs
         self.assertFalse(file_exists)
 
     # test a log file with greater than necessary logs
-    @unittest.skip
     def test_autogenerate_adjacency_2(self):
-        mes = {"user": "test2", "exp": "spinner", "course":"cie3", "payload": {"log": "voltage"}}
+        mes = {"user": "test2", "exp": "spinner", "hardware": "test01", "course":"engdes1", "payload": {"log": "voltage"}}
         # process.AddUserLog(mes)
-        process.AutoConvertLogs(mes, 20, False)
-        file_exists = os.path.isfile('./test/data/test2-spinner-cie3-adjacency.csv')
+        process.AutoConvertLogs(mes, 5, False)
+        file_exists = os.path.isfile('./test/data/test2-spinner-engdes1-adjacency.csv')
         
-        os.remove('./test/data/test2-spinner-cie3-adjacency.csv')
+        os.remove('./test/data/test2-spinner-engdes1-adjacency.csv')
         
         # file should be created as sufficient logs to run auto generate
         self.assertTrue(file_exists)
 
-    @unittest.skip
+    
     def test_command_list_multi_file_0(self):
         
         array, last_line = process.GetCommandList('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1')
@@ -124,14 +101,12 @@ class TestProcess(unittest.TestCase):
         print(array)
         print(last_line)
         self.assertEqual(len(array), 20)
-        # with self.subTest():
-        #     self.assertMultiLineEqual(last_line, '{"user": "expert", "t": 1657275054213, "payload": {"log": "position", "data": {"set": 2, "kp": 1, "ki": 0, "kd": 0}}} \n')
-    @unittest.skip
+        
     def test_generate_adjacency_multi_file_0(self):
         df = process.GenerateAdjacencyMatrix('53a6788c-e689-48d4-9231-c2fbd23df009', 'spinner', 'engdes1', False)
         
         os.remove('./test/data/53a6788c-e689-48d4-9231-c2fbd23df009-spinner-engdes1-adjacency.csv')
-        os.remove('./test/data/53a6788c-e689-48d4-9231-c2fbd23df009-spinner-engdes1.json')
+    
         with self.subTest():
             self.assertEqual(df['voltage_step']['voltage_ramp'], 9)
         with self.subTest():

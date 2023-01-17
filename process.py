@@ -358,8 +358,9 @@ def AutoConvertLogs(mes, n, deleteLogFile = True):
     user = mes['user']
     exp = mes['exp']
     course = mes['course']
+    hardware = mes["hardware"]
 
-    filename = '%s-%s-%s.json' % (user, exp, course)
+    filename = '%s-%s-%s-%s.json' % (user, hardware, exp, course)
     num_logs = 0
 
     with open('%s/%s' % (data_dir, filename), 'r') as log_file:
