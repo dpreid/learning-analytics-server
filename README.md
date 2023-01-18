@@ -30,8 +30,20 @@ Where log will be equal to the state set: voltage, voltage_ramp, position, posit
 
 ## Running on Amazon AWS EC2 instance
 
-Install docker and docker-compose. Will probably have to run all commands with sudo. 
+Currently using a t2.medium server with 30Gb of storage - still need to test.
+
+Relay is used to setup the appropriate logging websockets. Each piece of hardware logging is started by systemd.
+
+The analytics scripts are located in /opt/analytics/ on the AWS server. 
+The comparison graph folder is therefore in /opt/analytics/comparison_graphs
+Data should be saved to /var/analytics/data
+
+Need to set the following environment variables:
+
+LOG_URL for connecting to the logging websocket - defaults to localhost "ws://127.0.0.1:8000"
+DATA_PATH for providing the absolute path the the directory storing user logs - defaults to "./test/data"
+COMP_PATH for providing the absolute path to the comparison graphs folder - defaults to "./comparison_graphs"
+
+Cannot use relative paths for accessing folders (such as the comparison graph folder) - so need to include the above file paths in the scripts
 
 To get running I set HTTP, HTTPS, SSH (for logging in to EC2 instance locally) and All TCP were set in the inbound security settings. Will need to check the security of all this and exactly what is necessary. Connection through the websocket was not allowed until I set All TCP.
-
-Ensure that the ENV variable for the data directory to mount for storage is appropriately set in Dockerfile

@@ -16,6 +16,8 @@ import os
 from pathlib import Path
 import math
 
+comp_graph_dir = os.environ.get("COMP_PATH", "./comparison_graphs")
+
 """
 Compares two graphs using the provided model for TaskDistance
 Outputs a TaskDistance dissimilarity value
@@ -41,10 +43,10 @@ exp (string): name of the experiment
 def TaskIdentification(user, exp, course, a = 10, b = 1, p = 2, u = 2, l = -1):
     td = {}
     filestart = '%s-%s' % (exp, course)
-    for file in os.listdir('./comparison_graphs'):
+    for file in os.listdir(comp_graph_dir):
         if file.startswith(filestart):
             task_name = Path(file).stem
-            comp = pd.read_csv('./comparison_graphs/%s' % file, index_col=0)
+            comp = pd.read_csv('%s/%s' % (comp_graph_dir, file), index_col=0)
             task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
             td[task_name] = task_dist
     
@@ -59,7 +61,7 @@ compare_task (string): name of the comparison task
 """
 def TaskFeedback(user_A, compare_task):
     task_feedback = {'hardware': [], 'hardware_freq': [], 'transition': [], 'transition_freq': []}
-    B = pd.read_csv('./comparison_graphs/%s.csv' % compare_task, index_col=0)
+    B = pd.read_csv('%s/%s.csv' % (comp_graph_dir, compare_task), index_col=0)
     rows = user_A.shape[0]
     cols = user_A.shape[1]
     for i in range(0, rows):
@@ -86,7 +88,7 @@ exp (string): name of the experiment
 """
 def Exploration(user, exp, course, a = 0, b = 10, p = 2, u = 2, l = -1):
     try:
-        comp = pd.read_csv('./comparison_graphs/%s-%s-all.csv' % (exp, course), index_col=0)
+        comp = pd.read_csv('%s/%s-%s-all.csv' % (comp_graph_dir, exp, course), index_col=0)
         task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
 
         return task_dist
@@ -128,11 +130,11 @@ course (string): the course the student is enrolled on
 """
 def TotalEdges(user_A, exp, course):
     if(exp == 'spinner' and course == 'cie3'):
-        expected_graph = pd.read_csv('./comparison_graphs/spinner-cie3-all.csv', index_col=0)
+        expected_graph = pd.read_csv('%s/spinner-cie3-all.csv' % comp_graph_dir, index_col=0)
     elif(exp == 'spinner' and course == 'engdes1'):
-        expected_graph = pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0)
+        expected_graph = pd.read_csv('%s/spinner-engdes1-all.csv' % comp_graph_dir, index_col=0)
     elif(exp == 'pendulum' and course == 'engdes1'):
-        expected_graph = pd.read_csv('./comparison_graphs/pendulum-engdes1-all.csv', index_col=0)
+        expected_graph = pd.read_csv('%s/pendulum-engdes1-all.csv' % comp_graph_dir, index_col=0)
 
     expected_total = expected_graph.to_numpy().sum()
     student_total = user_A.to_numpy().sum()
@@ -201,10 +203,10 @@ def Centroid(user, exp, course):
                             {'name':'speed_ramp', 'x':-0.5,'y':-math.sin(math.pi/3)}]
 
         student = graphCentroid(user, vertex_positions)
-        task1 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-cie3-1-2.csv', index_col=0), vertex_positions)
-        task3 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-cie3-3.csv', index_col=0), vertex_positions)
-        task4 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-cie3-4.csv', index_col=0), vertex_positions)
-        all = graphCentroid(pd.read_csv('./comparison_graphs/spinner-cie3-all.csv', index_col=0), vertex_positions)
+        task1 = graphCentroid(pd.read_csv('%s/spinner-cie3-1-2.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task3 = graphCentroid(pd.read_csv('%s/spinner-cie3-3.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task4 = graphCentroid(pd.read_csv('%s/spinner-cie3-4.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        all = graphCentroid(pd.read_csv('%s/spinner-cie3-all.csv' % comp_graph_dir, index_col=0), vertex_positions)
 
         return {"student": student, "task1": task1, "task3": task3, "task4": task4, "all": all, "vertices": vertex_positions}
     
@@ -217,9 +219,9 @@ def Centroid(user, exp, course):
                             {'name':'speed_ramp', 'x':-0.5,'y':-math.sin(math.pi/3)}]
 
         student = graphCentroid(user, vertex_positions)
-        task1 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-1.csv', index_col=0), vertex_positions)
-        task2 = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-2.csv', index_col=0), vertex_positions)
-        all = graphCentroid(pd.read_csv('./comparison_graphs/spinner-engdes1-all.csv', index_col=0), vertex_positions)
+        task1 = graphCentroid(pd.read_csv('%s/spinner-engdes1-1.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task2 = graphCentroid(pd.read_csv('%s/spinner-engdes1-2.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        all = graphCentroid(pd.read_csv('%s/spinner-engdes1-all.csv' % comp_graph_dir, index_col=0), vertex_positions)
 
         return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
     
@@ -234,9 +236,9 @@ def Centroid(user, exp, course):
                             {'name':'start', 'x':-0.5,'y':1}]
 
         student = graphCentroid(user, vertex_positions)
-        task1 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-1.csv', index_col=0), vertex_positions)
-        task2 = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-2.csv', index_col=0), vertex_positions)
-        all = graphCentroid(pd.read_csv('./comparison_graphs/pendulum-engdes1-all.csv', index_col=0), vertex_positions)
+        task1 = graphCentroid(pd.read_csv('%s/pendulum-engdes1-1.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task2 = graphCentroid(pd.read_csv('%s/pendulum-engdes1-2.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        all = graphCentroid(pd.read_csv('%s/pendulum-engdes1-all.csv' % comp_graph_dir, index_col=0), vertex_positions)
 
         return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
 

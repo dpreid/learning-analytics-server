@@ -21,9 +21,9 @@ import os
 import pandas as pd
 from pyvis.network import Network
 
-#data_dir = os.environ.get('DATA_DIR')   # docker implementation
-data_dir = "./test/mock"                #testing UI logging
-#data_dir = "./test/data"                #local testing
+data_dir = os.environ.get("DATA_PATH", "./test/data")
+comp_graph_dir = os.environ.get("COMP_PATH", "./comparison_graphs")
+
 """
 Takes a new log message and adds it to the appropriate user log file
 message is already in json format and been loaded into json previously
@@ -144,7 +144,7 @@ def GetGraphComponents(user, exp, course):
     return nodes, edges, node_info
 
 def GetComparisonGraphComponents(comparison, exp):
-    df = pd.read_csv('./comparison_graphs/%s.csv' % comparison, index_col=0)
+    df = pd.read_csv('%s/%s.csv' % (comp_graph_dir, comparison), index_col=0)
     G = nx.from_pandas_adjacency(df, create_using=nx.DiGraph)
     G = SetGraphProperties(G, exp)
     in_centrality = nx.in_degree_centrality(G)
