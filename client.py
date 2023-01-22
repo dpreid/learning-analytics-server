@@ -32,7 +32,7 @@ def on_message(ws, message):
     try:
         
         mes = json.loads(message)
-        print(mes["type"])
+        ##print(mes["type"])
         ## if the message is a logging message from the UI then process this new log
         ## No response sent from client
         if(mes["type"] == "analytics"):
@@ -95,13 +95,8 @@ def on_message(ws, message):
             
         ## else if the message is feedback from the user, including tags on the dashboard
         elif(mes["type"] == "feedback"):
-            print('logging feedback')
-            process.AddUserFeedback(mes)
-
-        elif(mes["type"] == "response"):
-            print("Analytics sending response")
-        else:
-            print("log message not recognised")    
+            ##print('logging feedback')
+            process.AddUserFeedback(mes)   
         
     except Exception as e:
         print(e)
@@ -109,7 +104,7 @@ def on_message(ws, message):
 
 def connect():
     url = os.environ.get("LOG_URL","ws://127.0.0.1:8000/")
-    print(url)
+    ##print(url)
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(url, on_message=on_message, on_error=on_error, on_close=on_close)
     ws.run_forever()
