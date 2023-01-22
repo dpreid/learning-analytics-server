@@ -28,6 +28,8 @@ import response
 import pandas as pd
 from time import sleep
 
+num_logs = 0
+
 def on_message(ws, message):
     try:
         
@@ -41,6 +43,7 @@ def on_message(ws, message):
 
             ## if a student does not access the analytics dashboard then log files will grow without limit.
             ## Automatically convert log files to an adjacency matrix when log file reaches a specific number of lines
+            global num_logs
             num_logs += 1
             if(num_logs >= 100):
                 user = mes['user']
@@ -139,6 +142,5 @@ def on_open(ws):
     
 
 if __name__ == "__main__":
-    global num_logs
-    num_logs = 0
+    
     connect()
