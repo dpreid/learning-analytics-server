@@ -41,7 +41,16 @@ def on_message(ws, message):
 
             ## if a student does not access the analytics dashboard then log files will grow without limit.
             ## Automatically convert log files to an adjacency matrix when log file reaches a specific number of lines
-            process.AutoConvertLogs(mes, 100)
+            num_logs += 1
+            if(num_logs >= 100):
+                user = mes['user']
+                exp = mes['exp']
+                course = mes['course']
+                
+                process.GenerateAdjacencyMatrix(user, exp, course)
+
+                num_logs = 0
+                #process.AutoConvertLogs(mes, 100)
 
 
         ## else if the message is a request to return the analytics for a specific user then do..
@@ -130,5 +139,6 @@ def on_open(ws):
     
 
 if __name__ == "__main__":
-    
+    global num_logs
+    num_logs = 0
     connect()
