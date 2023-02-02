@@ -355,6 +355,9 @@ def GetUserFeedback(user_id, exp, course):
 
 
 '''
+NOT USED
+client.py now just checks for count > n itself and runs GenerateAdjacencyMatrix, since this function needs to open and read files, which is slower.
+
 Checks the number of logs in a student log file, if > n processes the log file into an adjacency matrix
 '''
 def AutoConvertLogs(mes, n, deleteLogFile = True):
