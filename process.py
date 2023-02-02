@@ -188,7 +188,7 @@ def GenerateAdjacencyMatrix(user, exp, course, deleteLogFile = True):
     if(exp == "spinner"):
         nodes = ['voltage_step', 'voltage_ramp', 'position_step', 'position_ramp', 'speed_step', 'speed_ramp']
     elif(exp == "pendulum"):
-        nodes = ['start','brake','load','free','sampling','drive_perc','brake_perc','measuring_tools']
+        nodes = ['start','brake','load','free','sampling','drive_perc','brake_perc','measuring_tools', 'record']
     else:
         nodes = []
 
@@ -300,6 +300,8 @@ def GetCommandList(user, exp, course):
                     command_array.append('brake_perc')
                 elif(log_data["payload"]["log"] == 'measuring_tools'):
                     command_array.append('measuring_tools')
+                elif(log_data["payload"]["log"] == 'record'):
+                    command_array.append('record')
                 else:
                     pass
 
@@ -327,8 +329,8 @@ def SetGraphProperties(G, exp):
         nx.set_edge_attributes(G, edge_labels, name='label')
 
     elif(exp == 'pendulum'):
-        x = {'start': -100, 'brake': 100, 'free': 200, 'load': 200, 'sampling': 100, 'drive_perc': -100, 'brake_perc': -200, 'measuring_tools': -200}
-        y = {'start': 200, 'brake': 200, 'free': 100, 'load': -100, 'sampling': -200, 'drive_perc': -200, 'brake_perc': -100, 'measuring_tools': 100}
+        x = {'start': 0, 'brake': 128, 'free': 196, 'load': 174, 'sampling': 68, 'drive_perc': -68, 'brake_perc': -174, 'measuring_tools': -196, 'record': -128}
+        y = {'start': 200, 'brake': 154, 'free': 34, 'load': -100, 'sampling': -188, 'drive_perc': -188, 'brake_perc': -100, 'measuring_tools': 34, 'record': -154}
         nx.set_node_attributes(G, x, 'x')
         nx.set_node_attributes(G, y, 'y')
 
