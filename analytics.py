@@ -226,14 +226,16 @@ def Centroid(user, exp, course):
         return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
     
     elif(exp == 'pendulum' and course == 'engdes1'):
-        vertex_positions = [{'name':'brake', 'x':0.5,'y':1}, 
-                            {'name':'free', 'x':1,'y':0.5}, 
-                            {'name':'load', 'x':1,'y':-0.5}, 
-                            {'name':'sampling', 'x':0.5,'y':-1}, 
-                            {'name':'drive_perc', 'x':-0.5,'y':-1}, 
-                            {'name':'brake_perc', 'x':-1,'y':-0.5},
-                            {'name':'measuring_tools', 'x':-1,'y':0.5},
-                            {'name':'start', 'x':-0.5,'y':1}]
+        vertex_positions = [{'name':'start', 'x':0,'y':1},
+                            {'name':'brake', 'x':0.64,'y':0.77}, 
+                            {'name':'free', 'x':0.98,'y':0.17}, 
+                            {'name':'load', 'x':0.87,'y':-0.5}, 
+                            {'name':'sampling', 'x':0.34,'y':-0.94}, 
+                            {'name':'drive_perc', 'x':-0.34,'y':-0.94}, 
+                            {'name':'brake_perc', 'x':-0.87,'y':-0.5},
+                            {'name':'measuring_tools', 'x':-0.98,'y':0.17},
+                            {'name':'record', 'x':-0.64,'y':0.77}
+                            ]
 
         student = graphCentroid(user, vertex_positions)
         task1 = graphCentroid(pd.read_csv('%s/pendulum-engdes1-1.csv' % comp_graph_dir, index_col=0), vertex_positions)
