@@ -1,8 +1,3 @@
-{"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "sampling"}}
-{"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "start"}}
-{"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "sampling"}}
-{"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "sampling"}}
-{"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "sampling"}}
 {"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "measuring_tools"}}
 {"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "drive_perc"}}
 {"user": "testuser", "t": 1673262940583, "exp": "pendulum", "course": "engdes1", "type": "log", "payload": {"log": "drive_perc"}}
