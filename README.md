@@ -1,8 +1,8 @@
-# Learning analytics
+# Learning analytics client
 
-These scripts will be run as a docker app on an AWS server for serving analytics data to student learning analytics dashboards.
+The analytics client is a python script that connects to the logging websocket of a single piece of remote hardware. It listens for json messages across that websocket and processes the appropriate messages coming from the remote lab UI and analytics dashboard.
 
-Currently contains boilerplate script from Tim Drysdale's go-pocketvna repo and scripts used in the learning-analytics repo for manual generation of all user learning analytics data. These scripts will be streamlined into the script that will run on message functions and a python package containing helper functions.
+Scripts for setting up the client are provided in ```./scripts``` and details of how to setup the server are given below.
 
 
 ## JSON command format
@@ -17,7 +17,7 @@ exp: "spinner",
 payload: payload}
 ```
 
-Where ```type``` is either "log" for logging new data to a user or "request" for returning the analytics data to a user dashboard.
+Where ```type``` is either "log" (which will be ignored by the analytics client); "analytics" for processing new data to a user; or "request" for returning the analytics data to a user dashboard.
 
 The payload differs, but is along the lines of:
 
@@ -30,7 +30,7 @@ Where log will be equal to the state set: voltage, voltage_ramp, position, posit
 
 ## Running on Amazon AWS EC2 instance
 
-Currently using a t2.medium server with 30Gb of storage - still need to test.
+Currently using a t2.medium server with 30Gb of storage. Each Python process only requires ~1% of CPU even when logging at high frequency (every 50ms).
 
 Relay is used to setup the appropriate logging websockets. Each piece of hardware logging is started by systemd.
 
@@ -49,9 +49,9 @@ Cannot use relative paths for accessing folders (such as the comparison graph fo
 To get running I set HTTP, HTTPS, SSH (for logging in to EC2 instance locally) and All TCP were set in the inbound security settings. Will need to check the security of all this and exactly what is necessary. Connection through the websocket was not allowed until I set All TCP.
 
 
-# analytics-setup
+# Setting up AWS EC2 or Raspberry Pi for running analytics client
 
-Setup instructions for background logging servers (including on Raspberry Pi for backup). This is an updated procedure that sets up and runs background logging in a similar way to the analytics client. The examples provided are for setting up with a specific range of equipment (spin30-41) therefore amendments will be required for different hardware.
+Setup instructions for background logging servers (including on Raspberry Pi for backup). The examples provided are for setting up with a specific range of equipment (spin30-41) therefore amendments will be required for different hardware.
 
 
 ## Adding another public key

@@ -3,10 +3,10 @@ Description=session host streaming service
 After=network.target session.service session-rules.service
 [Service]
 Environment="LOG_URL=ws://localhost:8888/ws/${dest}"
-Environment="DATA_DIR=/var/logging/data"
-Environment="HARDWARE_CODE=${dest}"
+Environment="DATA_PATH=/var/analytics/data"
+Environment="COMP_PATH=/opt/analytics/comparison_graphs"
 Restart=on-failure
-ExecStart=/usr/bin/python3 /opt/logging/client.py
+ExecStart=/usr/bin/python3 /opt/analytics/client.py
 
 [Install]
 WantedBy=multi-user.target 
