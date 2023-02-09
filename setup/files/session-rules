@@ -1,0 +1,425 @@
+#!/bin/sh
+spin30AccessFile="/etc/practable/log.access.spin30"
+spin31AccessFile="/etc/practable/log.access.spin31"
+spin32AccessFile="/etc/practable/log.access.spin32"
+spin33AccessFile="/etc/practable/log.access.spin33"
+spin34AccessFile="/etc/practable/log.access.spin34"
+spin35AccessFile="/etc/practable/log.access.spin35"
+spin36AccessFile="/etc/practable/log.access.spin36"
+spin37AccessFile="/etc/practable/log.access.spin37"
+spin38AccessFile="/etc/practable/log.access.spin38"
+spin39AccessFile="/etc/practable/log.access.spin39"
+spin40AccessFile="/etc/practable/log.access.spin40"
+spin41AccessFile="/etc/practable/log.access.spin41"
+spin42AccessFile="/etc/practable/log.access.spin42"
+spin43AccessFile="/etc/practable/log.access.spin43"
+spin44AccessFile="/etc/practable/log.access.spin44"
+spin45AccessFile="/etc/practable/log.access.spin45"
+spin46AccessFile="/etc/practable/log.access.spin46"
+spin47AccessFile="/etc/practable/log.access.spin47"
+spin48AccessFile="/etc/practable/log.access.spin48"
+spin49AccessFile="/etc/practable/log.access.spin49"
+spin50AccessFile="/etc/practable/log.access.spin50"
+spin51AccessFile="/etc/practable/log.access.spin51"
+spin52AccessFile="/etc/practable/log.access.spin52"
+spin53AccessFile="/etc/practable/log.access.spin53"
+spin54AccessFile="/etc/practable/log.access.spin54"
+spin55AccessFile="/etc/practable/log.access.spin55"
+spin56AccessFile="/etc/practable/log.access.spin56"
+spin57AccessFile="/etc/practable/log.access.spin57"
+spin58AccessFile="/etc/practable/log.access.spin58"
+spin59AccessFile="/etc/practable/log.access.spin59"
+spin60AccessFile="/etc/practable/log.access.spin60"
+spin61AccessFile="/etc/practable/log.access.spin61"
+spin62AccessFile="/etc/practable/log.access.spin62"
+spin63AccessFile="/etc/practable/log.access.spin63"
+spin64AccessFile="/etc/practable/log.access.spin64"
+spin65AccessFile="/etc/practable/log.access.spin65"
+spin66AccessFile="/etc/practable/log.access.spin66"
+spin67AccessFile="/etc/practable/log.access.spin67"
+spin68AccessFile="/etc/practable/log.access.spin68"
+spin69AccessFile="/etc/practable/log.access.spin69"
+spin70AccessFile="/etc/practable/log.access.spin70"
+spin71AccessFile="/etc/practable/log.access.spin71"
+spin72AccessFile="/etc/practable/log.access.spin72"
+spin73AccessFile="/etc/practable/log.access.spin73"
+spin74AccessFile="/etc/practable/log.access.spin74"
+spin75AccessFile="/etc/practable/log.access.spin75"
+spin76AccessFile="/etc/practable/log.access.spin76"
+spin77AccessFile="/etc/practable/log.access.spin77"
+
+pend00AccessFile="/etc/practable/log.access.pend00"
+pend01AccessFile="/etc/practable/log.access.pend01"
+pend02AccessFile="/etc/practable/log.access.pend02"
+pend03AccessFile="/etc/practable/log.access.pend03"
+pend04AccessFile="/etc/practable/log.access.pend04"
+pend05AccessFile="/etc/practable/log.access.pend05"
+pend06AccessFile="/etc/practable/log.access.pend06"
+pend07AccessFile="/etc/practable/log.access.pend07"
+pend08AccessFile="/etc/practable/log.access.pend08"
+pend09AccessFile="/etc/practable/log.access.pend09"
+pend10AccessFile="/etc/practable/log.access.pend10"
+pend11AccessFile="/etc/practable/log.access.pend11"
+pend12AccessFile="/etc/practable/log.access.pend12"
+pend13AccessFile="/etc/practable/log.access.pend13"
+pend14AccessFile="/etc/practable/log.access.pend14"
+pend15AccessFile="/etc/practable/log.access.pend15"
+pend16AccessFile="/etc/practable/log.access.pend16"
+pend17AccessFile="/etc/practable/log.access.pend17"
+pend18AccessFile="/etc/practable/log.access.pend18"
+pend19AccessFile="/etc/practable/log.access.pend19"
+pend20AccessFile="/etc/practable/log.access.pend20"
+pend21AccessFile="/etc/practable/log.access.pend21"
+pend22AccessFile="/etc/practable/log.access.pend22"
+pend23AccessFile="/etc/practable/log.access.pend23"
+pend24AccessFile="/etc/practable/log.access.pend24"
+pend25AccessFile="/etc/practable/log.access.pend25"
+pend26AccessFile="/etc/practable/log.access.pend26"
+pend27AccessFile="/etc/practable/log.access.pend27"
+pend28AccessFile="/etc/practable/log.access.pend28"
+pend29AccessFile="/etc/practable/log.access.pend29"
+pend30AccessFile="/etc/practable/log.access.pend30"
+pend31AccessFile="/etc/practable/log.access.pend31"
+pend32AccessFile="/etc/practable/log.access.pend32"
+pend33AccessFile="/etc/practable/log.access.pend33"
+pend34AccessFile="/etc/practable/log.access.pend34"
+
+spin30TokenFile="/etc/practable/log.token.spin30"
+spin31TokenFile="/etc/practable/log.token.spin31"
+spin32TokenFile="/etc/practable/log.token.spin32"
+spin33TokenFile="/etc/practable/log.token.spin33"
+spin34TokenFile="/etc/practable/log.token.spin34"
+spin35TokenFile="/etc/practable/log.token.spin35"
+spin36TokenFile="/etc/practable/log.token.spin36"
+spin37TokenFile="/etc/practable/log.token.spin37"
+spin38TokenFile="/etc/practable/log.token.spin38"
+spin39TokenFile="/etc/practable/log.token.spin39"
+spin40TokenFile="/etc/practable/log.token.spin40"
+spin41TokenFile="/etc/practable/log.token.spin41"
+spin42TokenFile="/etc/practable/log.token.spin42"
+spin43TokenFile="/etc/practable/log.token.spin43"
+spin44TokenFile="/etc/practable/log.token.spin44"
+spin45TokenFile="/etc/practable/log.token.spin45"
+spin46TokenFile="/etc/practable/log.token.spin46"
+spin47TokenFile="/etc/practable/log.token.spin47"
+spin48TokenFile="/etc/practable/log.token.spin48"
+spin49TokenFile="/etc/practable/log.token.spin49"
+spin50TokenFile="/etc/practable/log.token.spin50"
+spin51TokenFile="/etc/practable/log.token.spin51"
+spin52TokenFile="/etc/practable/log.token.spin52"
+spin53TokenFile="/etc/practable/log.token.spin53"
+spin54TokenFile="/etc/practable/log.token.spin54"
+spin55TokenFile="/etc/practable/log.token.spin55"
+spin56TokenFile="/etc/practable/log.token.spin56"
+spin57TokenFile="/etc/practable/log.token.spin57"
+spin58TokenFile="/etc/practable/log.token.spin58"
+spin59TokenFile="/etc/practable/log.token.spin59"
+spin60TokenFile="/etc/practable/log.token.spin60"
+spin61TokenFile="/etc/practable/log.token.spin61"
+spin62TokenFile="/etc/practable/log.token.spin62"
+spin63TokenFile="/etc/practable/log.token.spin63"
+spin64TokenFile="/etc/practable/log.token.spin64"
+spin65TokenFile="/etc/practable/log.token.spin65"
+spin66TokenFile="/etc/practable/log.token.spin66"
+spin67TokenFile="/etc/practable/log.token.spin67"
+spin68TokenFile="/etc/practable/log.token.spin68"
+spin69TokenFile="/etc/practable/log.token.spin69"
+spin70TokenFile="/etc/practable/log.token.spin70"
+spin71TokenFile="/etc/practable/log.token.spin71"
+spin72TokenFile="/etc/practable/log.token.spin72"
+spin73TokenFile="/etc/practable/log.token.spin73"
+spin74TokenFile="/etc/practable/log.token.spin74"
+spin75TokenFile="/etc/practable/log.token.spin75"
+spin76TokenFile="/etc/practable/log.token.spin76"
+spin77TokenFile="/etc/practable/log.token.spin77"
+
+pend00TokenFile="/etc/practable/log.token.pend00"
+pend01TokenFile="/etc/practable/log.token.pend01"
+pend02TokenFile="/etc/practable/log.token.pend02"
+pend03TokenFile="/etc/practable/log.token.pend03"
+pend04TokenFile="/etc/practable/log.token.pend04"
+pend05TokenFile="/etc/practable/log.token.pend05"
+pend06TokenFile="/etc/practable/log.token.pend06"
+pend07TokenFile="/etc/practable/log.token.pend07"
+pend08TokenFile="/etc/practable/log.token.pend08"
+pend09TokenFile="/etc/practable/log.token.pend09"
+pend10TokenFile="/etc/practable/log.token.pend10"
+pend11TokenFile="/etc/practable/log.token.pend11"
+pend12TokenFile="/etc/practable/log.token.pend12"
+pend13TokenFile="/etc/practable/log.token.pend13"
+pend14TokenFile="/etc/practable/log.token.pend14"
+pend15TokenFile="/etc/practable/log.token.pend15"
+pend16TokenFile="/etc/practable/log.token.pend16"
+pend17TokenFile="/etc/practable/log.token.pend17"
+pend18TokenFile="/etc/practable/log.token.pend18"
+pend19TokenFile="/etc/practable/log.token.pend19"
+pend20TokenFile="/etc/practable/log.token.pend20"
+pend21TokenFile="/etc/practable/log.token.pend21"
+pend22TokenFile="/etc/practable/log.token.pend22"
+pend23TokenFile="/etc/practable/log.token.pend23"
+pend24TokenFile="/etc/practable/log.token.pend24"
+pend25TokenFile="/etc/practable/log.token.pend25"
+pend26TokenFile="/etc/practable/log.token.pend26"
+pend27TokenFile="/etc/practable/log.token.pend27"
+pend28TokenFile="/etc/practable/log.token.pend28"
+pend29TokenFile="/etc/practable/log.token.pend29"
+pend30TokenFile="/etc/practable/log.token.pend30"
+pend31TokenFile="/etc/practable/log.token.pend31"
+pend32TokenFile="/etc/practable/log.token.pend32"
+pend33TokenFile="/etc/practable/log.token.pend33"
+pend34TokenFile="/etc/practable/log.token.pend34"
+
+spin30Access=$(cat "$spin30AccessFile")
+spin31Access=$(cat "$spin31AccessFile")
+spin32Access=$(cat "$spin32AccessFile")
+spin33Access=$(cat "$spin33AccessFile")
+spin34Access=$(cat "$spin34AccessFile")
+spin35Access=$(cat "$spin35AccessFile")
+spin36Access=$(cat "$spin36AccessFile")
+spin37Access=$(cat "$spin37AccessFile")
+spin38Access=$(cat "$spin38AccessFile")
+spin39Access=$(cat "$spin39AccessFile")
+spin40Access=$(cat "$spin40AccessFile")
+spin41Access=$(cat "$spin41AccessFile")
+spin42Access=$(cat "$spin42AccessFile")
+spin43Access=$(cat "$spin43AccessFile")
+spin44Access=$(cat "$spin44AccessFile")
+spin45Access=$(cat "$spin45AccessFile")
+spin46Access=$(cat "$spin46AccessFile")
+spin47Access=$(cat "$spin47AccessFile")
+spin48Access=$(cat "$spin48AccessFile")
+spin49Access=$(cat "$spin49AccessFile")
+spin50Access=$(cat "$spin50AccessFile")
+spin51Access=$(cat "$spin51AccessFile")
+spin52Access=$(cat "$spin52AccessFile")
+spin53Access=$(cat "$spin53AccessFile")
+spin54Access=$(cat "$spin54AccessFile")
+spin55Access=$(cat "$spin55AccessFile")
+spin56Access=$(cat "$spin56AccessFile")
+spin57Access=$(cat "$spin57AccessFile")
+spin58Access=$(cat "$spin58AccessFile")
+spin59Access=$(cat "$spin59AccessFile")
+spin60Access=$(cat "$spin60AccessFile")
+spin61Access=$(cat "$spin61AccessFile")
+spin62Access=$(cat "$spin62AccessFile")
+spin63Access=$(cat "$spin63AccessFile")
+spin64Access=$(cat "$spin64AccessFile")
+spin65Access=$(cat "$spin65AccessFile")
+spin66Access=$(cat "$spin66AccessFile")
+spin67Access=$(cat "$spin67AccessFile")
+spin68Access=$(cat "$spin68AccessFile")
+spin69Access=$(cat "$spin69AccessFile")
+spin70Access=$(cat "$spin70AccessFile")
+spin71Access=$(cat "$spin71AccessFile")
+spin72Access=$(cat "$spin72AccessFile")
+spin73Access=$(cat "$spin73AccessFile")
+spin74Access=$(cat "$spin74AccessFile")
+spin75Access=$(cat "$spin75AccessFile")
+spin76Access=$(cat "$spin76AccessFile")
+spin77Access=$(cat "$spin77AccessFile")
+
+pend00Access=$(cat "$pend00AccessFile")
+pend01Access=$(cat "$pend01AccessFile")
+pend02Access=$(cat "$pend02AccessFile")
+pend03Access=$(cat "$pend03AccessFile")
+pend04Access=$(cat "$pend04AccessFile")
+pend05Access=$(cat "$pend05AccessFile")
+pend06Access=$(cat "$pend06AccessFile")
+pend07Access=$(cat "$pend07AccessFile")
+pend08Access=$(cat "$pend08AccessFile")
+pend09Access=$(cat "$pend09AccessFile")
+pend10Access=$(cat "$pend10AccessFile")
+pend11Access=$(cat "$pend11AccessFile")
+pend12Access=$(cat "$pend12AccessFile")
+pend13Access=$(cat "$pend13AccessFile")
+pend14Access=$(cat "$pend14AccessFile")
+pend15Access=$(cat "$pend15AccessFile")
+pend16Access=$(cat "$pend16AccessFile")
+pend17Access=$(cat "$pend17AccessFile")
+pend18Access=$(cat "$pend18AccessFile")
+pend19Access=$(cat "$pend19AccessFile")
+pend20Access=$(cat "$pend20AccessFile")
+pend21Access=$(cat "$pend21AccessFile")
+pend22Access=$(cat "$pend22AccessFile")
+pend23Access=$(cat "$pend23AccessFile")
+pend24Access=$(cat "$pend24AccessFile")
+pend25Access=$(cat "$pend25AccessFile")
+pend26Access=$(cat "$pend26AccessFile")
+pend27Access=$(cat "$pend27AccessFile")
+pend28Access=$(cat "$pend28AccessFile")
+pend29Access=$(cat "$pend29AccessFile")
+pend30Access=$(cat "$pend30AccessFile")
+pend31Access=$(cat "$pend31AccessFile")
+pend32Access=$(cat "$pend32AccessFile")
+pend33Access=$(cat "$pend33AccessFile")
+pend34Access=$(cat "$pend34AccessFile")
+
+spin30Token=$(cat "$spin30TokenFile")
+spin31Token=$(cat "$spin31TokenFile")
+spin32Token=$(cat "$spin32TokenFile")
+spin33Token=$(cat "$spin33TokenFile")
+spin34Token=$(cat "$spin34TokenFile")
+spin35Token=$(cat "$spin35TokenFile")
+spin36Token=$(cat "$spin36TokenFile")
+spin37Token=$(cat "$spin37TokenFile")
+spin38Token=$(cat "$spin38TokenFile")
+spin39Token=$(cat "$spin39TokenFile")
+spin40Token=$(cat "$spin40TokenFile")
+spin41Token=$(cat "$spin41TokenFile")
+spin42Token=$(cat "$spin42TokenFile")
+spin43Token=$(cat "$spin43TokenFile")
+spin44Token=$(cat "$spin44TokenFile")
+spin45Token=$(cat "$spin45TokenFile")
+spin46Token=$(cat "$spin46TokenFile")
+spin47Token=$(cat "$spin47TokenFile")
+spin48Token=$(cat "$spin48TokenFile")
+spin49Token=$(cat "$spin49TokenFile")
+spin50Token=$(cat "$spin50TokenFile")
+spin51Token=$(cat "$spin51TokenFile")
+spin52Token=$(cat "$spin52TokenFile")
+spin53Token=$(cat "$spin53TokenFile")
+spin54Token=$(cat "$spin54TokenFile")
+spin55Token=$(cat "$spin55TokenFile")
+spin56Token=$(cat "$spin56TokenFile")
+spin57Token=$(cat "$spin57TokenFile")
+spin58Token=$(cat "$spin58TokenFile")
+spin59Token=$(cat "$spin59TokenFile")
+spin60Token=$(cat "$spin60TokenFile")
+spin61Token=$(cat "$spin61TokenFile")
+spin62Token=$(cat "$spin62TokenFile")
+spin63Token=$(cat "$spin63TokenFile")
+spin64Token=$(cat "$spin64TokenFile")
+spin65Token=$(cat "$spin65TokenFile")
+spin66Token=$(cat "$spin66TokenFile")
+spin67Token=$(cat "$spin67TokenFile")
+spin68Token=$(cat "$spin68TokenFile")
+spin69Token=$(cat "$spin69TokenFile")
+spin70Token=$(cat "$spin70TokenFile")
+spin71Token=$(cat "$spin71TokenFile")
+spin72Token=$(cat "$spin72TokenFile")
+spin73Token=$(cat "$spin73TokenFile")
+spin74Token=$(cat "$spin74TokenFile")
+spin75Token=$(cat "$spin75TokenFile")
+spin76Token=$(cat "$spin76TokenFile")
+spin77Token=$(cat "$spin77TokenFile")
+
+pend00Token=$(cat "$pend00TokenFile")
+pend01Token=$(cat "$pend01TokenFile")
+pend02Token=$(cat "$pend02TokenFile")
+pend03Token=$(cat "$pend03TokenFile")
+pend04Token=$(cat "$pend04TokenFile")
+pend05Token=$(cat "$pend05TokenFile")
+pend06Token=$(cat "$pend06TokenFile")
+pend07Token=$(cat "$pend07TokenFile")
+pend08Token=$(cat "$pend08TokenFile")
+pend09Token=$(cat "$pend09TokenFile")
+pend10Token=$(cat "$pend10TokenFile")
+pend11Token=$(cat "$pend11TokenFile")
+pend12Token=$(cat "$pend12TokenFile")
+pend13Token=$(cat "$pend13TokenFile")
+pend14Token=$(cat "$pend14TokenFile")
+pend15Token=$(cat "$pend15TokenFile")
+pend16Token=$(cat "$pend16TokenFile")
+pend17Token=$(cat "$pend17TokenFile")
+pend18Token=$(cat "$pend18TokenFile")
+pend19Token=$(cat "$pend19TokenFile")
+pend20Token=$(cat "$pend20TokenFile")
+pend21Token=$(cat "$pend21TokenFile")
+pend22Token=$(cat "$pend22TokenFile")
+pend23Token=$(cat "$pend23TokenFile")
+pend24Token=$(cat "$pend24TokenFile")
+pend25Token=$(cat "$pend25TokenFile")
+pend26Token=$(cat "$pend26TokenFile")
+pend27Token=$(cat "$pend27TokenFile")
+pend28Token=$(cat "$pend28TokenFile")
+pend29Token=$(cat "$pend29TokenFile")
+pend30Token=$(cat "$pend30TokenFile")
+pend31Token=$(cat "$pend31TokenFile")
+pend32Token=$(cat "$pend32TokenFile")
+pend33Token=$(cat "$pend33TokenFile")
+pend34Token=$(cat "$pend34TokenFile")
+
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin30","destination":"'"${spin30Access}"'","id":"0","token":"'"${spin30Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin31","destination":"'"${spin31Access}"'","id":"1","token":"'"${spin31Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin32","destination":"'"${spin32Access}"'","id":"2","token":"'"${spin32Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin33","destination":"'"${spin33Access}"'","id":"3","token":"'"${spin33Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin34","destination":"'"${spin34Access}"'","id":"4","token":"'"${spin34Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin35","destination":"'"${spin35Access}"'","id":"5","token":"'"${spin35Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin36","destination":"'"${spin36Access}"'","id":"6","token":"'"${spin36Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin37","destination":"'"${spin37Access}"'","id":"7","token":"'"${spin37Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin38","destination":"'"${spin38Access}"'","id":"8","token":"'"${spin38Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin39","destination":"'"${spin39Access}"'","id":"9","token":"'"${spin39Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin40","destination":"'"${spin40Access}"'","id":"10","token":"'"${spin40Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin41","destination":"'"${spin41Access}"'","id":"11","token":"'"${spin41Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin42","destination":"'"${spin42Access}"'","id":"12","token":"'"${spin42Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin43","destination":"'"${spin43Access}"'","id":"13","token":"'"${spin43Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin44","destination":"'"${spin44Access}"'","id":"14","token":"'"${spin44Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin45","destination":"'"${spin45Access}"'","id":"15","token":"'"${spin45Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin46","destination":"'"${spin46Access}"'","id":"16","token":"'"${spin46Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin47","destination":"'"${spin47Access}"'","id":"17","token":"'"${spin47Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin48","destination":"'"${spin48Access}"'","id":"18","token":"'"${spin48Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin49","destination":"'"${spin49Access}"'","id":"19","token":"'"${spin49Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin50","destination":"'"${spin50Access}"'","id":"20","token":"'"${spin50Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin51","destination":"'"${spin51Access}"'","id":"21","token":"'"${spin51Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin52","destination":"'"${spin52Access}"'","id":"22","token":"'"${spin52Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin53","destination":"'"${spin53Access}"'","id":"23","token":"'"${spin53Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin54","destination":"'"${spin54Access}"'","id":"24","token":"'"${spin54Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin55","destination":"'"${spin55Access}"'","id":"25","token":"'"${spin55Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin56","destination":"'"${spin56Access}"'","id":"26","token":"'"${spin56Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin57","destination":"'"${spin57Access}"'","id":"27","token":"'"${spin57Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin58","destination":"'"${spin58Access}"'","id":"28","token":"'"${spin58Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin59","destination":"'"${spin59Access}"'","id":"29","token":"'"${spin59Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin60","destination":"'"${spin60Access}"'","id":"30","token":"'"${spin60Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin61","destination":"'"${spin61Access}"'","id":"31","token":"'"${spin61Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin62","destination":"'"${spin62Access}"'","id":"32","token":"'"${spin62Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin63","destination":"'"${spin63Access}"'","id":"33","token":"'"${spin63Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin64","destination":"'"${spin64Access}"'","id":"34","token":"'"${spin64Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin65","destination":"'"${spin65Access}"'","id":"35","token":"'"${spin65Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin66","destination":"'"${spin66Access}"'","id":"36","token":"'"${spin66Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin67","destination":"'"${spin67Access}"'","id":"37","token":"'"${spin67Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin68","destination":"'"${spin68Access}"'","id":"38","token":"'"${spin68Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin69","destination":"'"${spin69Access}"'","id":"39","token":"'"${spin69Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin70","destination":"'"${spin70Access}"'","id":"40","token":"'"${spin70Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin71","destination":"'"${spin71Access}"'","id":"41","token":"'"${spin71Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin72","destination":"'"${spin72Access}"'","id":"42","token":"'"${spin72Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin73","destination":"'"${spin73Access}"'","id":"43","token":"'"${spin73Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin74","destination":"'"${spin74Access}"'","id":"44","token":"'"${spin74Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin75","destination":"'"${spin75Access}"'","id":"45","token":"'"${spin75Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin76","destination":"'"${spin76Access}"'","id":"46","token":"'"${spin76Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin77","destination":"'"${spin77Access}"'","id":"47","token":"'"${spin77Token}"'"}' http://localhost:8888/api/destinations
+
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend00","destination":"'"${pend00Access}"'","id":"48","token":"'"${pend00Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend01","destination":"'"${pend01Access}"'","id":"49","token":"'"${pend01Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend02","destination":"'"${pend02Access}"'","id":"50","token":"'"${pend02Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend03","destination":"'"${pend03Access}"'","id":"51","token":"'"${pend03Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend04","destination":"'"${pend04Access}"'","id":"52","token":"'"${pend04Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend05","destination":"'"${pend05Access}"'","id":"53","token":"'"${pend05Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend06","destination":"'"${pend06Access}"'","id":"54","token":"'"${pend06Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend07","destination":"'"${pend07Access}"'","id":"55","token":"'"${pend07Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend08","destination":"'"${pend08Access}"'","id":"56","token":"'"${pend08Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend09","destination":"'"${pend09Access}"'","id":"57","token":"'"${pend09Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend10","destination":"'"${pend10Access}"'","id":"58","token":"'"${pend10Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend11","destination":"'"${pend11Access}"'","id":"59","token":"'"${pend11Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend12","destination":"'"${pend12Access}"'","id":"60","token":"'"${pend12Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend13","destination":"'"${pend13Access}"'","id":"61","token":"'"${pend13Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend14","destination":"'"${pend14Access}"'","id":"62","token":"'"${pend14Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend15","destination":"'"${pend15Access}"'","id":"63","token":"'"${pend15Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend16","destination":"'"${pend16Access}"'","id":"64","token":"'"${pend16Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend17","destination":"'"${pend17Access}"'","id":"65","token":"'"${pend17Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend18","destination":"'"${pend18Access}"'","id":"66","token":"'"${pend18Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend19","destination":"'"${pend19Access}"'","id":"67","token":"'"${pend19Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend20","destination":"'"${pend20Access}"'","id":"68","token":"'"${pend20Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend21","destination":"'"${pend21Access}"'","id":"69","token":"'"${pend21Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend22","destination":"'"${pend22Access}"'","id":"70","token":"'"${pend22Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend23","destination":"'"${pend23Access}"'","id":"71","token":"'"${pend23Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend24","destination":"'"${pend24Access}"'","id":"72","token":"'"${pend24Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend25","destination":"'"${pend25Access}"'","id":"73","token":"'"${pend25Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend26","destination":"'"${pend26Access}"'","id":"74","token":"'"${pend26Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend27","destination":"'"${pend27Access}"'","id":"75","token":"'"${pend27Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend28","destination":"'"${pend28Access}"'","id":"76","token":"'"${pend28Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend29","destination":"'"${pend29Access}"'","id":"77","token":"'"${pend29Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend30","destination":"'"${pend30Access}"'","id":"78","token":"'"${pend30Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend31","destination":"'"${pend31Access}"'","id":"79","token":"'"${pend31Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend32","destination":"'"${pend32Access}"'","id":"80","token":"'"${pend32Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend33","destination":"'"${pend33Access}"'","id":"81","token":"'"${pend33Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend34","destination":"'"${pend34Access}"'","id":"82","token":"'"${pend34Token}"'"}' http://localhost:8888/api/destinations
