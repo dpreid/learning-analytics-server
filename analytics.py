@@ -219,11 +219,12 @@ def Centroid(user, exp, course):
                             {'name':'speed_ramp', 'x':-0.5,'y':-math.sin(math.pi/3)}]
 
         student = graphCentroid(user, vertex_positions)
-        task1 = graphCentroid(pd.read_csv('%s/spinner-engdes1-1.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task1core = graphCentroid(pd.read_csv('%s/spinner-engdes1-1-core.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task1ext = graphCentroid(pd.read_csv('%s/spinner-engdes1-1-ext.csv' % comp_graph_dir, index_col=0), vertex_positions)
         task2 = graphCentroid(pd.read_csv('%s/spinner-engdes1-2.csv' % comp_graph_dir, index_col=0), vertex_positions)
         all = graphCentroid(pd.read_csv('%s/spinner-engdes1-all.csv' % comp_graph_dir, index_col=0), vertex_positions)
 
-        return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
+        return {"student": student, "task1core": task1core, "task1ext": task1ext, "task2": task2, "all": all, "vertices": vertex_positions}
     
     elif(exp == 'pendulum' and course == 'engdes1'):
         vertex_positions = [{'name':'start', 'x':0,'y':1},
@@ -238,11 +239,12 @@ def Centroid(user, exp, course):
                             ]
 
         student = graphCentroid(user, vertex_positions)
-        task1 = graphCentroid(pd.read_csv('%s/pendulum-engdes1-1.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task1core = graphCentroid(pd.read_csv('%s/pendulum-engdes1-1-core.csv' % comp_graph_dir, index_col=0), vertex_positions)
+        task1ext = graphCentroid(pd.read_csv('%s/pendulum-engdes1-1-ext.csv' % comp_graph_dir, index_col=0), vertex_positions)
         task2 = graphCentroid(pd.read_csv('%s/pendulum-engdes1-2.csv' % comp_graph_dir, index_col=0), vertex_positions)
         all = graphCentroid(pd.read_csv('%s/pendulum-engdes1-all.csv' % comp_graph_dir, index_col=0), vertex_positions)
 
-        return {"student": student, "task1": task1, "task2": task2, "all": all, "vertices": vertex_positions}
+        return {"student": student, "task1core": task1core, "task1ext": task1ext, "task2": task2, "all": all, "vertices": vertex_positions}
 
     else:
 
