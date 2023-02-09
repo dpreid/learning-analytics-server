@@ -1,0 +1,12 @@
+[Unit]
+Description=session host streaming service
+After=network.target session.service session-rules.service
+[Service]
+Environment="LOG_URL=ws://localhost:8888/ws/${dest}"
+Environment="DATA_DIR=/var/logging/data"
+Environment="HARDWARE_CODE=${dest}"
+Restart=on-failure
+ExecStart=/usr/bin/python3 /opt/logging/client.py
+
+[Install]
+WantedBy=multi-user.target 

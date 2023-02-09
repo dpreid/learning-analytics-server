@@ -1,0 +1,2 @@
+systemctl stop log-${service}
+systemctl disable log-${service}
