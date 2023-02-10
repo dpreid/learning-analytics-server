@@ -69,8 +69,14 @@ def AddUserFeedback(message):
                 subjects.append('spinner-cie3-3')
                 subjects.append('spinner-cie3-4')
             elif(course == 'engdes1'):
-                subjects.append('pendulum-engdes1-1')
-                subjects.append('pendulum-engdes1-2')
+                if(exp == 'pendulum'):
+                    subjects.append('pendulum-engdes1-1-core')
+                    subjects.append('pendulum-engdes1-1-ext')
+                    subjects.append('pendulum-engdes1-2')
+                elif(exp == 'spinner'):
+                    subjects.append('spinner-engdes1-1-core')
+                    subjects.append('spinner-engdes1-1-ext')
+                    subjects.append('spinner-engdes1-2')
             
             matrix = np.zeros(shape=(len(states), len(subjects)))
             df = pd.DataFrame(matrix, states, subjects)
