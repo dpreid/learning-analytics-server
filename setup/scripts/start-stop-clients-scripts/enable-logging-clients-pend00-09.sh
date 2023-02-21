@@ -1,0 +1,21 @@
+#!/bin/bash
+systemctl enable log-pend00
+systemctl start log-pend00
+systemctl enable log-pend01
+systemctl start log-pend01
+systemctl enable log-pend02
+systemctl start log-pend02
+systemctl enable log-pend03
+systemctl start log-pend03
+systemctl enable log-pend04
+systemctl start log-pend04
+systemctl enable log-pend05
+systemctl start log-pend05
+systemctl enable log-pend06
+systemctl start log-pend06
+systemctl enable log-pend07
+systemctl start log-pend07
+systemctl enable log-pend08
+systemctl start log-pend08
+systemctl enable log-pend09
+systemctl start log-pend09

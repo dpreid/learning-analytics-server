@@ -1,0 +1,21 @@
+#!/bin/bash
+systemctl enable log-spin30
+systemctl start log-spin30
+systemctl enable log-spin31
+systemctl start log-spin31
+systemctl enable log-spin32
+systemctl start log-spin32
+systemctl enable log-spin33
+systemctl start log-spin33
+systemctl enable log-spin34
+systemctl start log-spin34
+systemctl enable log-spin35
+systemctl start log-spin35
+systemctl enable log-spin36
+systemctl start log-spin36
+systemctl enable log-spin37
+systemctl start log-spin37
+systemctl enable log-spin38
+systemctl start log-spin38
+systemctl enable log-spin39
+systemctl start log-spin39

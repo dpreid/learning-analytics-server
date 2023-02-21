@@ -83,6 +83,9 @@ pend31AccessFile="/etc/practable/log.access.pend31"
 pend32AccessFile="/etc/practable/log.access.pend32"
 pend33AccessFile="/etc/practable/log.access.pend33"
 pend34AccessFile="/etc/practable/log.access.pend34"
+pend35AccessFile="/etc/practable/log.access.pend35"
+pend36AccessFile="/etc/practable/log.access.pend36"
+pend37AccessFile="/etc/practable/log.access.pend37"
 
 spin30TokenFile="/etc/practable/log.token.spin30"
 spin31TokenFile="/etc/practable/log.token.spin31"
@@ -168,6 +171,9 @@ pend31TokenFile="/etc/practable/log.token.pend31"
 pend32TokenFile="/etc/practable/log.token.pend32"
 pend33TokenFile="/etc/practable/log.token.pend33"
 pend34TokenFile="/etc/practable/log.token.pend34"
+pend35TokenFile="/etc/practable/log.token.pend35"
+pend36TokenFile="/etc/practable/log.token.pend36"
+pend37TokenFile="/etc/practable/log.token.pend37"
 
 spin30Access=$(cat "$spin30AccessFile")
 spin31Access=$(cat "$spin31AccessFile")
@@ -253,6 +259,9 @@ pend31Access=$(cat "$pend31AccessFile")
 pend32Access=$(cat "$pend32AccessFile")
 pend33Access=$(cat "$pend33AccessFile")
 pend34Access=$(cat "$pend34AccessFile")
+pend35Access=$(cat "$pend35AccessFile")
+pend36Access=$(cat "$pend36AccessFile")
+pend37Access=$(cat "$pend37AccessFile")
 
 spin30Token=$(cat "$spin30TokenFile")
 spin31Token=$(cat "$spin31TokenFile")
@@ -338,6 +347,9 @@ pend31Token=$(cat "$pend31TokenFile")
 pend32Token=$(cat "$pend32TokenFile")
 pend33Token=$(cat "$pend33TokenFile")
 pend34Token=$(cat "$pend34TokenFile")
+pend35Token=$(cat "$pend35TokenFile")
+pend36Token=$(cat "$pend36TokenFile")
+pend37Token=$(cat "$pend37TokenFile")
 
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin30","destination":"'"${spin30Access}"'","id":"0","token":"'"${spin30Token}"'"}' http://localhost:8888/api/destinations
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin31","destination":"'"${spin31Access}"'","id":"1","token":"'"${spin31Token}"'"}' http://localhost:8888/api/destinations
@@ -423,3 +435,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend31","destina
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend32","destination":"'"${pend32Access}"'","id":"80","token":"'"${pend32Token}"'"}' http://localhost:8888/api/destinations
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend33","destination":"'"${pend33Access}"'","id":"81","token":"'"${pend33Token}"'"}' http://localhost:8888/api/destinations
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend34","destination":"'"${pend34Access}"'","id":"82","token":"'"${pend34Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend35","destination":"'"${pend35Access}"'","id":"83","token":"'"${pend35Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend36","destination":"'"${pend36Access}"'","id":"84","token":"'"${pend36Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"pend37","destination":"'"${pend37Access}"'","id":"85","token":"'"${pend37Token}"'"}' http://localhost:8888/api/destinations
