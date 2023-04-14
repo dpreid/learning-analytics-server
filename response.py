@@ -66,7 +66,10 @@ exp (string): the remote lab hardware
 
 """
 def TaskCompletionResponse(user_A, user_id, exp, course):
-    task_dists = analytics.TaskIdentification(user_A, exp, course)
+    if(exp == 'spinner'):
+        task_dists = analytics.TaskIdentification(user_A, exp, course)
+    elif(exp == 'pendulum'):
+        task_dists = analytics.TaskIdentification(user_A, exp, course)
     response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_identification", "tasks": task_dists}
 
     return response
