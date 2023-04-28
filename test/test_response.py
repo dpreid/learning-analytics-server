@@ -18,7 +18,7 @@ class TestResponse(unittest.TestCase):
             pass
     
     def test_taskidentification(self):
-        td = analytics.TaskIdentification(self.A, 'spinner', 'cie3')
+        td = analytics.TaskIdentification(self.A, 'spinner', 'cie3', 'taskcompare')
         with self.subTest():
             self.assertIn('spinner-cie3-3', td)
         with self.subTest():
