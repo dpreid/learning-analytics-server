@@ -65,11 +65,11 @@ user_id (string): user UUID
 exp (string): the remote lab hardware
 
 """
-def TaskCompletionResponse(user_A, user_id, exp, course):
+def TaskCompletionResponse(user_A, user_id, exp, course, algorithm = 'taskcompare'):
     if(exp == 'spinner'):
-        task_dists = analytics.TaskIdentification(user_A, exp, course)
+        task_dists = analytics.TaskIdentification(user_A, exp, course, algorithm)
     elif(exp == 'pendulum'):
-        task_dists = analytics.TaskIdentification(user_A, exp, course)
+        task_dists = analytics.TaskIdentification(user_A, exp, course, algorithm)
     response = {"user": user_id, "type":"response", "exp": exp, "course": course, "content":"task_identification", "tasks": task_dists}
 
     return response
