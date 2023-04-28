@@ -42,7 +42,7 @@ user (Dataframe): user adjacency matrix as a pandas Dataframe
 comparison (Dataframe): the comparison adjacency matrix as a pandas Dataframe
 a, b, p, u, l (float): the TaskDistance model to use to calculate distance
 """
-def DistanceBetweenGraphs(user, comparison, a = 10, b = 1, p = 2, u = 2, l = -1, algorithm = 'taskcompare'):
+def DistanceBetweenGraphs(user, comparison, algorithm, a = 10, b = 1, p = 2, u = 2, l = -1):
     
     if(algorithm == "ged"):
         distance = GED(user.to_numpy(), comparison.to_numpy())
@@ -59,14 +59,14 @@ user (Dataframe): user adjacency matrix as a pandas Dataframe
 exp (string): name of the experiment
 
 """
-def TaskIdentification(user, exp, course, a = 10, b = 1, p = 2, u = 2, l = -1, algorithm = "taskcompare"):
+def TaskIdentification(user, exp, course, algorithm, a = 10, b = 1, p = 2, u = 2, l = -1):
     td = {}
     filestart = '%s-%s' % (exp, course)
     for file in os.listdir(comp_graph_dir):
         if file.startswith(filestart):
             task_name = Path(file).stem
             comp = pd.read_csv('%s/%s' % (comp_graph_dir, file), index_col=0)
-            task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l, algorithm)
+            task_dist = DistanceBetweenGraphs(user, comp, algorithm, a, b, p, u, l)
             td[task_name] = task_dist
     
     return td
