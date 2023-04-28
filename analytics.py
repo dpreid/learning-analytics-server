@@ -9,45 +9,64 @@ Compares student to comparison graphs, using TaskDistance models.
 
 @author: dprydereid@gmail.com
 """
-import pandas as pd
-from TaskDistance import TaskDistance, checkMissingEdge
-import process
-import os
-from pathlib import Path
 import math
+import numpy as np
+import os
+import pandas as pd
+from pathlib import Path
+import process
+from TaskDistance import TaskDistance, checkMissingEdge
 
 comp_graph_dir = os.environ.get("COMP_PATH", "./comparison_graphs")
+
+"""Returns the Graph Edit Distance (GED) between two adjacency matrices. Returns a distance value, not a similarity.
+
+        Parameters:
+        A1 (array): An adjacency matrix as a numpy array
+        A2 (array): An adjacency matrix as a numpy array
+
+        Returns:
+        float: GED distance
+"""
+def GED(A1, A2):
+    diff = A1 - A2
+    diff_abs = np.abs(diff)
+    return np.sum(diff_abs)
 
 """
 Compares two graphs using the provided model for TaskDistance
 Outputs a TaskDistance dissimilarity value
 
+algorithm (string): the dissimilarity algorithm to use for the comparison: "taskcompare", "ged" etc.
 user (Dataframe): user adjacency matrix as a pandas Dataframe
 comparison (Dataframe): the comparison adjacency matrix as a pandas Dataframe
 a, b, p, u, l (float): the TaskDistance model to use to calculate distance
 """
-def DistanceBetweenGraphs(user, comparison, a, b, p = 2, u = 2, l = -1):
-
-    distance = TaskDistance(user, comparison, a, b, p, u, l)
-
+def DistanceBetweenGraphs(user, comparison, a = 10, b = 1, p = 2, u = 2, l = -1, algorithm = 'taskcompare'):
+    
+    if(algorithm == "ged"):
+        distance = GED(user.to_numpy(), comparison.to_numpy())
+    else:
+        distance = TaskDistance(user, comparison, a, b, p, u, l)
+    
     return distance
 
 
 """
-Returns TaskDistance to each comparison model.
+Returns the graph dissimilarity to each comparison model for the selected dissimilarity algorithm, defaulting to taskcompare.
 
 user (Dataframe): user adjacency matrix as a pandas Dataframe
 exp (string): name of the experiment
 
 """
-def TaskIdentification(user, exp, course, a = 10, b = 1, p = 2, u = 2, l = -1):
+def TaskIdentification(user, exp, course, a = 10, b = 1, p = 2, u = 2, l = -1, algorithm = "taskcompare"):
     td = {}
     filestart = '%s-%s' % (exp, course)
     for file in os.listdir(comp_graph_dir):
         if file.startswith(filestart):
             task_name = Path(file).stem
             comp = pd.read_csv('%s/%s' % (comp_graph_dir, file), index_col=0)
-            task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l)
+            task_dist = DistanceBetweenGraphs(user, comp, a, b, p, u, l, algorithm)
             td[task_name] = task_dist
     
     return td
