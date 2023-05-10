@@ -6,8 +6,9 @@ This project provides a set of scripts for adding graph based learning analytics
 
 LA is used in this context to provide formative feedback to student users of remote labs. Details of the design and an evaluation of the system will be available in a future publication, soon to be submitted to IEEE Learning Technologies.
 
-![LA UI Upper](./img/LA_UI_upper.png)
-![LA UI Lower](./img/LA_UI_lower.png)
+The basis of the learning analytics is the logging of interactions with the hardware (and key UI components) for the creation of a graphical representation of the lab work performed by a user.
+
+![LA Graph](./img/expected-task-graph.png)
 
 
 # Setup
